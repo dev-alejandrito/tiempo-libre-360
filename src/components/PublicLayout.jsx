@@ -12,6 +12,7 @@ import { CONTACT_EMAIL } from "../lib/contact";
 
 const NAV = [["/", "Inicio"], ["/como-funciona", "Cómo funciona"], ["/explorar", "Explorar habilidades"], ["/comunidad", "Comunidad"], ["/comunidad-politecnica", "Comunidad Politécnica"], ["/faq", "FAQ"], ["/contacto", "Contacto"]];
 
+/** @param {{ children?: import("react").ReactNode }} props */
 export default function PublicLayout({ children }) {
   const [open, setOpen] = useState(false);
   const { me } = useAuth();

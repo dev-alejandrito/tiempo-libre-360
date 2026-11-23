@@ -28,3 +28,13 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules (TIEMPO LIBRE 360)
+
+- Pages under `src/pages/**` are the original JSX screens; keep them and their design classes in `src/styles.css`. Routes in `src/routes/*` are thin wrappers. Why: the owner requires the original design and structure to stay unchanged.
+- Pages import routing only from `@/lib/router` (React Router–shaped shim over TanStack Router). Why: lets the original screens run unchanged on TanStack.
+- All business logic (credits, exchanges, verification, feedback, private classes, chat) runs on the server in `src/server/tl/*.server.js`, reached through the single `tlApi` server function (`src/lib/tl-api.functions.ts`, client helper `api()` in `src/lib/pb.js`). The server checks the session and roles on every call. Why: ports the original PocketBase hooks with identical rules and keeps privileged tables out of the browser.
+- Private feature tables (verification requests, feedback reports, private bookings) have no browser access; chat messages are readable only by the two participants and written only through the server. Why: users may only see their own data and conversations.
+- Uploaded evidence goes to the private `evidencias` bucket under `<user id>/...`; it is shown only through short-lived signed links created by the server. Why: evidence files are private.
+- Roles live only in `public.user_roles`; the owner admin role is granted by a database function after that email is confirmed. Why: prevents privilege escalation.
+- Private classes are paid directly between users outside the platform; never add payment gateways, card fields or payment confirmations. Why: owner requirement.

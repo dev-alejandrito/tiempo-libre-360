@@ -1,22 +1,124 @@
 {
-  "source": "code-archive (tiempolibre360.zip) — Vite + React SPA on PocketBase (pb_hooks)",
-  "capabilities": [
-    {"capability": "frontend pages, design and navigation", "source": "app/src (React Router)", "outcome": "migrate to TanStack routes keeping JSX pages and styles", "status": "in_progress", "next_action": "port routes and shims"},
-    {"capability": "schema", "source": "PocketBase collections (no migrations folder)", "outcome": "recreate in Lovable Cloud Postgres with RLS", "status": "in_progress", "next_action": "apply migration"},
-    {"capability": "records", "source": "PocketBase data.db (not included in archive)", "outcome": "migrate", "status": "pending", "next_action": "request CSV/JSON export from Admin > Configuración > Exportar after preview"},
-    {"capability": "auth identities", "source": "PocketBase members auth collection", "outcome": "replace with Lovable Cloud email/password; existing users re-register or are imported from export", "status": "pending", "next_action": "import members export when provided"},
-    {"capability": "authorization (roles user/moderator/admin, suspension)", "source": "members.role/status + hooks", "outcome": "user_roles table + RLS + server checks; suspension bans the account", "status": "in_progress", "next_action": "implement"},
-    {"capability": "admin account", "source": "user request", "outcome": "ortizcallesjoahann@gmail.com gets admin role after verifying email", "status": "in_progress", "next_action": "trigger on email confirmation"},
-    {"capability": "uploaded file bytes (evidence/feedback attachments)", "source": "PocketBase storage (not included)", "outcome": "private storage bucket; old files need export", "status": "pending", "next_action": "request files only if user wants old evidence"},
-    {"capability": "server logic /api/tl/*", "source": "pb_hooks/*.js", "outcome": "port to TanStack server function dispatcher", "status": "in_progress", "next_action": "port"},
-    {"capability": "WhatsApp/SMS via Twilio (admin-entered keys)", "source": "tl_lib.js sendExternal", "outcome": "preserve; inactive until admin enters keys", "status": "in_progress", "next_action": "port"},
-    {"capability": "email sending", "source": "not built in source", "outcome": "Lovable Cloud auth emails (confirm/reset) only", "status": "in_progress", "next_action": "wire reset page"},
-    {"capability": "map (Leaflet + OpenStreetMap tiles)", "source": "MapView.jsx", "outcome": "preserve", "status": "in_progress", "next_action": "client-only load"},
-    {"capability": "Jitsi meeting links", "source": "exchangeAction accept", "outcome": "preserve (no API)", "status": "in_progress", "next_action": "port"},
-    {"capability": "skill verification with mandatory video + certificate", "source": "user request (extends accreditations)", "outcome": "build", "status": "pending", "next_action": "build"},
-    {"capability": "suggestions/complaints/reports with admin replies and status", "source": "feedback_reports", "outcome": "migrate + verify", "status": "pending", "next_action": "build"},
-    {"capability": "private chat to agree personalized classes (no payments)", "source": "user request (extends private classes)", "outcome": "build", "status": "pending", "next_action": "build"},
-    {"capability": "publishing", "source": "user request", "outcome": "ready to publish from Lovable; not published without approval", "status": "pending", "next_action": "user clicks Publish"},
-    {"capability": "verification", "source": "-", "outcome": "end-to-end checks", "status": "pending", "next_action": "run after build"}
-  ]
+ "source": "code-archive (tiempolibre360.zip) — Vite + React SPA on PocketBase (pb_hooks)",
+ "capabilities": [
+  {
+   "capability": "frontend pages, design and navigation",
+   "source": "app/src (React Router)",
+   "outcome": "migrate to TanStack routes keeping JSX pages and styles",
+   "status": "verified",
+   "next_action": "-"
+  },
+  {
+   "capability": "schema",
+   "source": "PocketBase collections (no migrations folder)",
+   "outcome": "recreate in Lovable Cloud Postgres with RLS",
+   "status": "verified",
+   "next_action": "-"
+  },
+  {
+   "capability": "records",
+   "source": "PocketBase data.db (not included in archive)",
+   "outcome": "migrate",
+   "status": "pending",
+   "next_action": "request CSV/JSON export from Admin > Configuración > Exportar after preview"
+  },
+  {
+   "capability": "auth identities",
+   "source": "PocketBase members auth collection",
+   "outcome": "replace with Lovable Cloud email/password; existing users re-register or are imported from export",
+   "status": "pending",
+   "next_action": "import members export when provided"
+  },
+  {
+   "capability": "authorization (roles user/moderator/admin, suspension)",
+   "source": "members.role/status + hooks",
+   "outcome": "user_roles table + RLS + server checks; suspension bans the account",
+   "status": "verified",
+   "next_action": "-"
+  },
+  {
+   "capability": "admin account",
+   "source": "user request",
+   "outcome": "ortizcallesjoahann@gmail.com gets admin role after verifying email",
+   "status": "migrated",
+   "next_action": "owner registers and confirms ortizcallesjoahann@gmail.com"
+  },
+  {
+   "capability": "uploaded file bytes (evidence/feedback attachments)",
+   "source": "PocketBase storage (not included)",
+   "outcome": "private storage bucket; old files need export",
+   "status": "pending",
+   "next_action": "request files only if user wants old evidence"
+  },
+  {
+   "capability": "server logic /api/tl/*",
+   "source": "pb_hooks/*.js",
+   "outcome": "port to TanStack server function dispatcher",
+   "status": "verified",
+   "next_action": "-"
+  },
+  {
+   "capability": "WhatsApp/SMS via Twilio (admin-entered keys)",
+   "source": "tl_lib.js sendExternal",
+   "outcome": "preserve; inactive until admin enters keys",
+   "status": "migrated",
+   "next_action": "inactive until admin enters Twilio keys"
+  },
+  {
+   "capability": "email sending",
+   "source": "not built in source",
+   "outcome": "Lovable Cloud auth emails (confirm/reset) only",
+   "status": "migrated",
+   "next_action": "-"
+  },
+  {
+   "capability": "map (Leaflet + OpenStreetMap tiles)",
+   "source": "MapView.jsx",
+   "outcome": "preserve",
+   "status": "migrated",
+   "next_action": "-"
+  },
+  {
+   "capability": "Jitsi meeting links",
+   "source": "exchangeAction accept",
+   "outcome": "preserve (no API)",
+   "status": "migrated",
+   "next_action": "-"
+  },
+  {
+   "capability": "skill verification with mandatory video + certificate",
+   "source": "user request (extends accreditations)",
+   "outcome": "build",
+   "status": "verified",
+   "next_action": "-"
+  },
+  {
+   "capability": "suggestions/complaints/reports with admin replies and status",
+   "source": "feedback_reports",
+   "outcome": "migrate + verify",
+   "status": "verified",
+   "next_action": "-"
+  },
+  {
+   "capability": "private chat to agree personalized classes (no payments)",
+   "source": "user request (extends private classes)",
+   "outcome": "build",
+   "status": "verified",
+   "next_action": "-"
+  },
+  {
+   "capability": "publishing",
+   "source": "user request",
+   "outcome": "ready to publish from Lovable; not published without approval",
+   "status": "pending",
+   "next_action": "user clicks Publish"
+  },
+  {
+   "capability": "verification",
+   "source": "-",
+   "outcome": "end-to-end checks",
+   "status": "verified",
+   "next_action": "-"
+  }
+ ]
 }

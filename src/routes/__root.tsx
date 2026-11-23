@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
+  Link,
   createRootRouteWithContext,
   useRouter,
   HeadContent,
@@ -14,7 +15,6 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/lib/auth";
 import { ToastProvider } from "@/components/ui.jsx";
 import PublicLayout from "@/components/PublicLayout";
-import { Link } from "@/lib/router";
 
 function NotFoundComponent() {
   return (

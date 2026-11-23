@@ -14,7 +14,7 @@ export const tlApi = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => apiInput.parse(d))
   .handler(async ({ data }): Promise<{ ok: boolean; status: number; message: string; json: string }> => {
     const { handleTl } = await import("@/server/tl/router.server.js");
-    return handleTl(data);
+    return handleTl({ path: data.path, method: data.method, body: data.body, query: data.query });
   });
 
 const emailInput = z.object({ email: z.string().max(200), ok: z.boolean().optional() });

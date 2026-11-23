@@ -214,7 +214,7 @@ function BookingCard({ b, onChange }) {
         <PrivateChip />
         <span className={`chip ${BK_ST[b.status] || ""}`}>{b.status_label || BK_LABEL[b.status] || b.status}</span>
         <span className="num text-xs font-semibold text-[#4b4638]">{b.code}</span>
-        {b.source === "chat" && <span className="chip chip-info"><MessageCircle size={13} aria-hidden="true" />Acordada por chat</span>}
+        {b.conversation && <span className="chip chip-info"><MessageCircle size={13} aria-hidden="true" />Acordada por chat</span>}
       </div>
       <div>
         <h3 className="text-xl font-bold">{b.title}</h3>
@@ -382,6 +382,9 @@ export default function PrivateClasses() {
   const mine = useApi("/private/mine");
   // Abrir (o iniciar) una conversación desde un enlace: ?chat=<id> o ?to=<persona>.
   useEffect(() => { if (chatParam) { setTab("chat"); setOpenChat(chatParam); } }, [chatParam]);
+  // Las clases acordadas en el chat aparecen al cambiar de pestaña sin recargar la página.
+  const first = useRef(true);
+  useEffect(() => { if (first.current) { first.current = false; return; } if (tab === "mine" || tab === "teach") mine.reload(); }, [tab]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!toParam) return;
     let live = true;

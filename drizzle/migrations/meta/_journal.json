@@ -15,6 +15,13 @@
       "when": 1795473930772,
       "tag": "0001_evidencias_storage_policies",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795475821944,
+      "tag": "0002_harden_trigger_functions",
+      "breakpoints": true
     }
   ]
 }

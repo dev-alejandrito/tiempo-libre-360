@@ -1,0 +1,42 @@
+import { LayoutDashboard, UserRound, Sparkles, GraduationCap, Search, HeartHandshake, Inbox, Repeat2 as Repeat, CalendarDays, Wallet, Bell, BadgeCheck, Trophy, Settings, ShieldHalf, Users, Flag, MessagesSquare as MessageSquare, Mail, ScrollText, ChartColumn, Globe, Coins, Award, Banknote, LifeBuoy, ShieldAlert } from "lucide-react";
+
+export const memberNav = (isStaff) => [
+  { to: "/app", label: "Dashboard", section: "Mi espacio", icon: LayoutDashboard, end: true },
+  { to: "/app/perfil", label: "Perfil inteligente", icon: UserRound },
+  { to: "/app/mis-habilidades", label: "Mis habilidades", icon: Sparkles },
+  { to: "/app/quiero-aprender", label: "Quiero aprender", icon: GraduationCap },
+  { to: "/app/buscar", section: "Encontrar personas", label: "Buscar personas", icon: Search },
+  { to: "/app/coincidencias", label: "Coincidencias", icon: HeartHandshake },
+  { to: "/app/solicitudes", section: "Intercambios", label: "Solicitudes", icon: Inbox },
+  { to: "/app/intercambios", label: "Mis clases", icon: Repeat },
+  { to: "/app/calendario", label: "Calendario", icon: CalendarDays },
+  { to: "/app/acreditaciones", section: "Enseñar", label: "Verificar habilidades", icon: Award },
+  { to: "/app/clases-particulares", label: "Clases y chat privado", icon: Banknote },
+  { to: "/app/creditos", section: "Mi cuenta", label: "Cartera de créditos", icon: Wallet },
+  { to: "/app/notificaciones", label: "Notificaciones", icon: Bell },
+  { to: "/app/pasaporte", label: "Pasaporte de confianza", icon: BadgeCheck },
+  { to: "/app/retos", label: "Retos", icon: Trophy },
+  { to: "/app/quejas", label: "Sugerencias y reportes", icon: LifeBuoy },
+  { to: "/app/configuracion", label: "Configuración", icon: Settings },
+  isStaff ? { to: "/admin", label: "Panel de gestión", icon: ShieldHalf, end: true } : null,
+];
+
+export const adminNav = (isAdmin) => [
+  isAdmin ? { to: "/admin", label: "Estadísticas", section: "Resumen", icon: ChartColumn, end: true } : null,
+  isAdmin ? { to: "/admin/usuarios", label: "Usuarios y roles", section: "Personas", icon: Users } : { to: "/admin/usuarios", label: "Usuarios", section: "Personas", icon: Users },
+  { to: "/admin/habilidades", label: "Habilidades", icon: Sparkles },
+  { to: "/admin/intercambios", section: "Intercambios y créditos", label: "Intercambios", icon: Repeat },
+  isAdmin ? { to: "/admin/creditos", label: "Créditos", icon: Coins } : null,
+  { to: "/admin/reportes", section: "Moderación", label: "Reportes y moderación", icon: Flag },
+  { to: "/admin/actividad", label: "Actividad sospechosa", icon: ShieldAlert },
+  { to: "/admin/clases", label: "Supervisión de clases", icon: ShieldAlert },
+  { to: "/admin/acreditaciones", label: "Verificación de habilidades", icon: Award },
+  { to: "/admin/clases-particulares", label: "Clases particulares", icon: Banknote },
+  { to: "/admin/quejas", label: "Sugerencias y reportes", icon: LifeBuoy },
+  { to: "/admin/comunidad", label: "Comunidad", icon: MessageSquare },
+  isAdmin ? { to: "/admin/retos", section: "Contenido", label: "Retos", icon: Trophy } : null,
+  isAdmin ? { to: "/admin/mensajes", label: "Mensajes de contacto", icon: Mail } : null,
+  isAdmin ? { to: "/admin/configuracion", section: "Sistema", label: "Configuración", icon: Settings } : null,
+  isAdmin ? { to: "/admin/auditoria", label: "Auditoría", icon: ScrollText } : null,
+  { to: "/app", label: "Volver a mi panel", icon: Globe, end: true },
+];

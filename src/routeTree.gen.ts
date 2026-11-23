@@ -9,50 +9,1100 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as PublicRouteImport } from './routes/_public'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as PublicIndexRouteImport } from './routes/_public.index'
+import { Route as PublicComoFuncionaRouteImport } from './routes/_public.como-funciona'
+import { Route as PublicComunidadRouteImport } from './routes/_public.comunidad'
+import { Route as PublicComunidadPolitecnicaRouteImport } from './routes/_public.comunidad-politecnica'
+import { Route as PublicContactoRouteImport } from './routes/_public.contacto'
+import { Route as PublicExplorarRouteImport } from './routes/_public.explorar'
+import { Route as PublicFaqRouteImport } from './routes/_public.faq'
+import { Route as PublicIngresarRouteImport } from './routes/_public.ingresar'
+import { Route as PublicRecuperarRouteImport } from './routes/_public.recuperar'
+import { Route as PublicRegistroRouteImport } from './routes/_public.registro'
+import { Route as PublicRestablecerRouteImport } from './routes/_public.restablecer'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAcreditacionesRouteImport } from './routes/admin.acreditaciones'
+import { Route as AdminActividadRouteImport } from './routes/admin.actividad'
+import { Route as AdminAuditoriaRouteImport } from './routes/admin.auditoria'
+import { Route as AdminClasesRouteImport } from './routes/admin.clases'
+import { Route as AdminClasesParticularesRouteImport } from './routes/admin.clases-particulares'
+import { Route as AdminComunidadRouteImport } from './routes/admin.comunidad'
+import { Route as AdminConfiguracionRouteImport } from './routes/admin.configuracion'
+import { Route as AdminCreditosRouteImport } from './routes/admin.creditos'
+import { Route as AdminHabilidadesRouteImport } from './routes/admin.habilidades'
+import { Route as AdminIntercambiosRouteImport } from './routes/admin.intercambios'
+import { Route as AdminMensajesRouteImport } from './routes/admin.mensajes'
+import { Route as AdminQuejasRouteImport } from './routes/admin.quejas'
+import { Route as AdminReportesRouteImport } from './routes/admin.reportes'
+import { Route as AdminRetosRouteImport } from './routes/admin.retos'
+import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAcreditacionesRouteImport } from './routes/app.acreditaciones'
+import { Route as AppBuscarRouteImport } from './routes/app.buscar'
+import { Route as AppCalendarioRouteImport } from './routes/app.calendario'
+import { Route as AppClasesParticularesRouteImport } from './routes/app.clases-particulares'
+import { Route as AppCoincidenciasRouteImport } from './routes/app.coincidencias'
+import { Route as AppConfiguracionRouteImport } from './routes/app.configuracion'
+import { Route as AppCreditosRouteImport } from './routes/app.creditos'
+import { Route as AppIntercambiosRouteImport } from './routes/app.intercambios'
+import { Route as AppMisHabilidadesRouteImport } from './routes/app.mis-habilidades'
+import { Route as AppNotificacionesRouteImport } from './routes/app.notificaciones'
+import { Route as AppPasaporteRouteImport } from './routes/app.pasaporte'
+import { Route as AppPerfilRouteImport } from './routes/app.perfil'
+import { Route as AppQuejasRouteImport } from './routes/app.quejas'
+import { Route as AppQuieroAprenderRouteImport } from './routes/app.quiero-aprender'
+import { Route as AppRetosRouteImport } from './routes/app.retos'
+import { Route as AppSolicitudesRouteImport } from './routes/app.solicitudes'
+import { Route as PublicLegalIndexRouteImport } from './routes/_public.legal.index'
+import { Route as PublicLegalSlugRouteImport } from './routes/_public.legal.$slug'
+import { Route as AppPersonaIdRouteImport } from './routes/app.persona.$id'
 
-const IndexRoute = IndexRouteImport.update({
+const PublicRoute = PublicRouteImport.update({
+  id: '/_public',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicComoFuncionaRoute = PublicComoFuncionaRouteImport.update({
+  id: '/como-funciona',
+  path: '/como-funciona',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicComunidadRoute = PublicComunidadRouteImport.update({
+  id: '/comunidad',
+  path: '/comunidad',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicComunidadPolitecnicaRoute =
+  PublicComunidadPolitecnicaRouteImport.update({
+    id: '/comunidad-politecnica',
+    path: '/comunidad-politecnica',
+    getParentRoute: () => PublicRoute,
+  } as any)
+const PublicContactoRoute = PublicContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicExplorarRoute = PublicExplorarRouteImport.update({
+  id: '/explorar',
+  path: '/explorar',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicFaqRoute = PublicFaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicIngresarRoute = PublicIngresarRouteImport.update({
+  id: '/ingresar',
+  path: '/ingresar',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicRecuperarRoute = PublicRecuperarRouteImport.update({
+  id: '/recuperar',
+  path: '/recuperar',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicRegistroRoute = PublicRegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicRestablecerRoute = PublicRestablecerRouteImport.update({
+  id: '/restablecer',
+  path: '/restablecer',
+  getParentRoute: () => PublicRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAcreditacionesRoute = AdminAcreditacionesRouteImport.update({
+  id: '/acreditaciones',
+  path: '/acreditaciones',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminActividadRoute = AdminActividadRouteImport.update({
+  id: '/actividad',
+  path: '/actividad',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAuditoriaRoute = AdminAuditoriaRouteImport.update({
+  id: '/auditoria',
+  path: '/auditoria',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminClasesRoute = AdminClasesRouteImport.update({
+  id: '/clases',
+  path: '/clases',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminClasesParticularesRoute = AdminClasesParticularesRouteImport.update({
+  id: '/clases-particulares',
+  path: '/clases-particulares',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminComunidadRoute = AdminComunidadRouteImport.update({
+  id: '/comunidad',
+  path: '/comunidad',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminConfiguracionRoute = AdminConfiguracionRouteImport.update({
+  id: '/configuracion',
+  path: '/configuracion',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCreditosRoute = AdminCreditosRouteImport.update({
+  id: '/creditos',
+  path: '/creditos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminHabilidadesRoute = AdminHabilidadesRouteImport.update({
+  id: '/habilidades',
+  path: '/habilidades',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminIntercambiosRoute = AdminIntercambiosRouteImport.update({
+  id: '/intercambios',
+  path: '/intercambios',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMensajesRoute = AdminMensajesRouteImport.update({
+  id: '/mensajes',
+  path: '/mensajes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminQuejasRoute = AdminQuejasRouteImport.update({
+  id: '/quejas',
+  path: '/quejas',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReportesRoute = AdminReportesRouteImport.update({
+  id: '/reportes',
+  path: '/reportes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRetosRoute = AdminRetosRouteImport.update({
+  id: '/retos',
+  path: '/retos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAcreditacionesRoute = AppAcreditacionesRouteImport.update({
+  id: '/acreditaciones',
+  path: '/acreditaciones',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBuscarRoute = AppBuscarRouteImport.update({
+  id: '/buscar',
+  path: '/buscar',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCalendarioRoute = AppCalendarioRouteImport.update({
+  id: '/calendario',
+  path: '/calendario',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppClasesParticularesRoute = AppClasesParticularesRouteImport.update({
+  id: '/clases-particulares',
+  path: '/clases-particulares',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCoincidenciasRoute = AppCoincidenciasRouteImport.update({
+  id: '/coincidencias',
+  path: '/coincidencias',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConfiguracionRoute = AppConfiguracionRouteImport.update({
+  id: '/configuracion',
+  path: '/configuracion',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCreditosRoute = AppCreditosRouteImport.update({
+  id: '/creditos',
+  path: '/creditos',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppIntercambiosRoute = AppIntercambiosRouteImport.update({
+  id: '/intercambios',
+  path: '/intercambios',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMisHabilidadesRoute = AppMisHabilidadesRouteImport.update({
+  id: '/mis-habilidades',
+  path: '/mis-habilidades',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificacionesRoute = AppNotificacionesRouteImport.update({
+  id: '/notificaciones',
+  path: '/notificaciones',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPasaporteRoute = AppPasaporteRouteImport.update({
+  id: '/pasaporte',
+  path: '/pasaporte',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPerfilRoute = AppPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppQuejasRoute = AppQuejasRouteImport.update({
+  id: '/quejas',
+  path: '/quejas',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppQuieroAprenderRoute = AppQuieroAprenderRouteImport.update({
+  id: '/quiero-aprender',
+  path: '/quiero-aprender',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRetosRoute = AppRetosRouteImport.update({
+  id: '/retos',
+  path: '/retos',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSolicitudesRoute = AppSolicitudesRouteImport.update({
+  id: '/solicitudes',
+  path: '/solicitudes',
+  getParentRoute: () => AppRoute,
+} as any)
+const PublicLegalIndexRoute = PublicLegalIndexRouteImport.update({
+  id: '/legal/',
+  path: '/legal/',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicLegalSlugRoute = PublicLegalSlugRouteImport.update({
+  id: '/legal/$slug',
+  path: '/legal/$slug',
+  getParentRoute: () => PublicRoute,
+} as any)
+const AppPersonaIdRoute = AppPersonaIdRouteImport.update({
+  id: '/persona/$id',
+  path: '/persona/$id',
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof PublicIndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/app': typeof AppRouteWithChildren
+  '/como-funciona': typeof PublicComoFuncionaRoute
+  '/comunidad': typeof PublicComunidadRoute
+  '/comunidad-politecnica': typeof PublicComunidadPolitecnicaRoute
+  '/contacto': typeof PublicContactoRoute
+  '/explorar': typeof PublicExplorarRoute
+  '/faq': typeof PublicFaqRoute
+  '/ingresar': typeof PublicIngresarRoute
+  '/recuperar': typeof PublicRecuperarRoute
+  '/registro': typeof PublicRegistroRoute
+  '/restablecer': typeof PublicRestablecerRoute
+  '/admin/acreditaciones': typeof AdminAcreditacionesRoute
+  '/admin/actividad': typeof AdminActividadRoute
+  '/admin/auditoria': typeof AdminAuditoriaRoute
+  '/admin/clases': typeof AdminClasesRoute
+  '/admin/clases-particulares': typeof AdminClasesParticularesRoute
+  '/admin/comunidad': typeof AdminComunidadRoute
+  '/admin/configuracion': typeof AdminConfiguracionRoute
+  '/admin/creditos': typeof AdminCreditosRoute
+  '/admin/habilidades': typeof AdminHabilidadesRoute
+  '/admin/intercambios': typeof AdminIntercambiosRoute
+  '/admin/mensajes': typeof AdminMensajesRoute
+  '/admin/quejas': typeof AdminQuejasRoute
+  '/admin/reportes': typeof AdminReportesRoute
+  '/admin/retos': typeof AdminRetosRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
+  '/app/acreditaciones': typeof AppAcreditacionesRoute
+  '/app/buscar': typeof AppBuscarRoute
+  '/app/calendario': typeof AppCalendarioRoute
+  '/app/clases-particulares': typeof AppClasesParticularesRoute
+  '/app/coincidencias': typeof AppCoincidenciasRoute
+  '/app/configuracion': typeof AppConfiguracionRoute
+  '/app/creditos': typeof AppCreditosRoute
+  '/app/intercambios': typeof AppIntercambiosRoute
+  '/app/mis-habilidades': typeof AppMisHabilidadesRoute
+  '/app/notificaciones': typeof AppNotificacionesRoute
+  '/app/pasaporte': typeof AppPasaporteRoute
+  '/app/perfil': typeof AppPerfilRoute
+  '/app/quejas': typeof AppQuejasRoute
+  '/app/quiero-aprender': typeof AppQuieroAprenderRoute
+  '/app/retos': typeof AppRetosRoute
+  '/app/solicitudes': typeof AppSolicitudesRoute
+  '/admin/': typeof AdminIndexRoute
+  '/app/': typeof AppIndexRoute
+  '/legal/$slug': typeof PublicLegalSlugRoute
+  '/app/persona/$id': typeof AppPersonaIdRoute
+  '/legal/': typeof PublicLegalIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/como-funciona': typeof PublicComoFuncionaRoute
+  '/comunidad': typeof PublicComunidadRoute
+  '/comunidad-politecnica': typeof PublicComunidadPolitecnicaRoute
+  '/contacto': typeof PublicContactoRoute
+  '/explorar': typeof PublicExplorarRoute
+  '/faq': typeof PublicFaqRoute
+  '/ingresar': typeof PublicIngresarRoute
+  '/recuperar': typeof PublicRecuperarRoute
+  '/registro': typeof PublicRegistroRoute
+  '/restablecer': typeof PublicRestablecerRoute
+  '/admin/acreditaciones': typeof AdminAcreditacionesRoute
+  '/admin/actividad': typeof AdminActividadRoute
+  '/admin/auditoria': typeof AdminAuditoriaRoute
+  '/admin/clases': typeof AdminClasesRoute
+  '/admin/clases-particulares': typeof AdminClasesParticularesRoute
+  '/admin/comunidad': typeof AdminComunidadRoute
+  '/admin/configuracion': typeof AdminConfiguracionRoute
+  '/admin/creditos': typeof AdminCreditosRoute
+  '/admin/habilidades': typeof AdminHabilidadesRoute
+  '/admin/intercambios': typeof AdminIntercambiosRoute
+  '/admin/mensajes': typeof AdminMensajesRoute
+  '/admin/quejas': typeof AdminQuejasRoute
+  '/admin/reportes': typeof AdminReportesRoute
+  '/admin/retos': typeof AdminRetosRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
+  '/app/acreditaciones': typeof AppAcreditacionesRoute
+  '/app/buscar': typeof AppBuscarRoute
+  '/app/calendario': typeof AppCalendarioRoute
+  '/app/clases-particulares': typeof AppClasesParticularesRoute
+  '/app/coincidencias': typeof AppCoincidenciasRoute
+  '/app/configuracion': typeof AppConfiguracionRoute
+  '/app/creditos': typeof AppCreditosRoute
+  '/app/intercambios': typeof AppIntercambiosRoute
+  '/app/mis-habilidades': typeof AppMisHabilidadesRoute
+  '/app/notificaciones': typeof AppNotificacionesRoute
+  '/app/pasaporte': typeof AppPasaporteRoute
+  '/app/perfil': typeof AppPerfilRoute
+  '/app/quejas': typeof AppQuejasRoute
+  '/app/quiero-aprender': typeof AppQuieroAprenderRoute
+  '/app/retos': typeof AppRetosRoute
+  '/app/solicitudes': typeof AppSolicitudesRoute
+  '/': typeof PublicIndexRoute
+  '/admin': typeof AdminIndexRoute
+  '/app': typeof AppIndexRoute
+  '/legal/$slug': typeof PublicLegalSlugRoute
+  '/app/persona/$id': typeof AppPersonaIdRoute
+  '/legal': typeof PublicLegalIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_public': typeof PublicRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
+  '/app': typeof AppRouteWithChildren
+  '/_public/como-funciona': typeof PublicComoFuncionaRoute
+  '/_public/comunidad': typeof PublicComunidadRoute
+  '/_public/comunidad-politecnica': typeof PublicComunidadPolitecnicaRoute
+  '/_public/contacto': typeof PublicContactoRoute
+  '/_public/explorar': typeof PublicExplorarRoute
+  '/_public/faq': typeof PublicFaqRoute
+  '/_public/ingresar': typeof PublicIngresarRoute
+  '/_public/recuperar': typeof PublicRecuperarRoute
+  '/_public/registro': typeof PublicRegistroRoute
+  '/_public/restablecer': typeof PublicRestablecerRoute
+  '/admin/acreditaciones': typeof AdminAcreditacionesRoute
+  '/admin/actividad': typeof AdminActividadRoute
+  '/admin/auditoria': typeof AdminAuditoriaRoute
+  '/admin/clases': typeof AdminClasesRoute
+  '/admin/clases-particulares': typeof AdminClasesParticularesRoute
+  '/admin/comunidad': typeof AdminComunidadRoute
+  '/admin/configuracion': typeof AdminConfiguracionRoute
+  '/admin/creditos': typeof AdminCreditosRoute
+  '/admin/habilidades': typeof AdminHabilidadesRoute
+  '/admin/intercambios': typeof AdminIntercambiosRoute
+  '/admin/mensajes': typeof AdminMensajesRoute
+  '/admin/quejas': typeof AdminQuejasRoute
+  '/admin/reportes': typeof AdminReportesRoute
+  '/admin/retos': typeof AdminRetosRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
+  '/app/acreditaciones': typeof AppAcreditacionesRoute
+  '/app/buscar': typeof AppBuscarRoute
+  '/app/calendario': typeof AppCalendarioRoute
+  '/app/clases-particulares': typeof AppClasesParticularesRoute
+  '/app/coincidencias': typeof AppCoincidenciasRoute
+  '/app/configuracion': typeof AppConfiguracionRoute
+  '/app/creditos': typeof AppCreditosRoute
+  '/app/intercambios': typeof AppIntercambiosRoute
+  '/app/mis-habilidades': typeof AppMisHabilidadesRoute
+  '/app/notificaciones': typeof AppNotificacionesRoute
+  '/app/pasaporte': typeof AppPasaporteRoute
+  '/app/perfil': typeof AppPerfilRoute
+  '/app/quejas': typeof AppQuejasRoute
+  '/app/quiero-aprender': typeof AppQuieroAprenderRoute
+  '/app/retos': typeof AppRetosRoute
+  '/app/solicitudes': typeof AppSolicitudesRoute
+  '/_public/': typeof PublicIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/app/': typeof AppIndexRoute
+  '/_public/legal/$slug': typeof PublicLegalSlugRoute
+  '/app/persona/$id': typeof AppPersonaIdRoute
+  '/_public/legal/': typeof PublicLegalIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/app'
+    | '/como-funciona'
+    | '/comunidad'
+    | '/comunidad-politecnica'
+    | '/contacto'
+    | '/explorar'
+    | '/faq'
+    | '/ingresar'
+    | '/recuperar'
+    | '/registro'
+    | '/restablecer'
+    | '/admin/acreditaciones'
+    | '/admin/actividad'
+    | '/admin/auditoria'
+    | '/admin/clases'
+    | '/admin/clases-particulares'
+    | '/admin/comunidad'
+    | '/admin/configuracion'
+    | '/admin/creditos'
+    | '/admin/habilidades'
+    | '/admin/intercambios'
+    | '/admin/mensajes'
+    | '/admin/quejas'
+    | '/admin/reportes'
+    | '/admin/retos'
+    | '/admin/usuarios'
+    | '/app/acreditaciones'
+    | '/app/buscar'
+    | '/app/calendario'
+    | '/app/clases-particulares'
+    | '/app/coincidencias'
+    | '/app/configuracion'
+    | '/app/creditos'
+    | '/app/intercambios'
+    | '/app/mis-habilidades'
+    | '/app/notificaciones'
+    | '/app/pasaporte'
+    | '/app/perfil'
+    | '/app/quejas'
+    | '/app/quiero-aprender'
+    | '/app/retos'
+    | '/app/solicitudes'
+    | '/admin/'
+    | '/app/'
+    | '/legal/$slug'
+    | '/app/persona/$id'
+    | '/legal/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/como-funciona'
+    | '/comunidad'
+    | '/comunidad-politecnica'
+    | '/contacto'
+    | '/explorar'
+    | '/faq'
+    | '/ingresar'
+    | '/recuperar'
+    | '/registro'
+    | '/restablecer'
+    | '/admin/acreditaciones'
+    | '/admin/actividad'
+    | '/admin/auditoria'
+    | '/admin/clases'
+    | '/admin/clases-particulares'
+    | '/admin/comunidad'
+    | '/admin/configuracion'
+    | '/admin/creditos'
+    | '/admin/habilidades'
+    | '/admin/intercambios'
+    | '/admin/mensajes'
+    | '/admin/quejas'
+    | '/admin/reportes'
+    | '/admin/retos'
+    | '/admin/usuarios'
+    | '/app/acreditaciones'
+    | '/app/buscar'
+    | '/app/calendario'
+    | '/app/clases-particulares'
+    | '/app/coincidencias'
+    | '/app/configuracion'
+    | '/app/creditos'
+    | '/app/intercambios'
+    | '/app/mis-habilidades'
+    | '/app/notificaciones'
+    | '/app/pasaporte'
+    | '/app/perfil'
+    | '/app/quejas'
+    | '/app/quiero-aprender'
+    | '/app/retos'
+    | '/app/solicitudes'
+    | '/'
+    | '/admin'
+    | '/app'
+    | '/legal/$slug'
+    | '/app/persona/$id'
+    | '/legal'
+  id:
+    | '__root__'
+    | '/_public'
+    | '/admin'
+    | '/app'
+    | '/_public/como-funciona'
+    | '/_public/comunidad'
+    | '/_public/comunidad-politecnica'
+    | '/_public/contacto'
+    | '/_public/explorar'
+    | '/_public/faq'
+    | '/_public/ingresar'
+    | '/_public/recuperar'
+    | '/_public/registro'
+    | '/_public/restablecer'
+    | '/admin/acreditaciones'
+    | '/admin/actividad'
+    | '/admin/auditoria'
+    | '/admin/clases'
+    | '/admin/clases-particulares'
+    | '/admin/comunidad'
+    | '/admin/configuracion'
+    | '/admin/creditos'
+    | '/admin/habilidades'
+    | '/admin/intercambios'
+    | '/admin/mensajes'
+    | '/admin/quejas'
+    | '/admin/reportes'
+    | '/admin/retos'
+    | '/admin/usuarios'
+    | '/app/acreditaciones'
+    | '/app/buscar'
+    | '/app/calendario'
+    | '/app/clases-particulares'
+    | '/app/coincidencias'
+    | '/app/configuracion'
+    | '/app/creditos'
+    | '/app/intercambios'
+    | '/app/mis-habilidades'
+    | '/app/notificaciones'
+    | '/app/pasaporte'
+    | '/app/perfil'
+    | '/app/quejas'
+    | '/app/quiero-aprender'
+    | '/app/retos'
+    | '/app/solicitudes'
+    | '/_public/'
+    | '/admin/'
+    | '/app/'
+    | '/_public/legal/$slug'
+    | '/app/persona/$id'
+    | '/_public/legal/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  PublicRoute: typeof PublicRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_public': {
+      id: '/_public'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PublicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_public/': {
+      id: '/_public/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof PublicIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/como-funciona': {
+      id: '/_public/como-funciona'
+      path: '/como-funciona'
+      fullPath: '/como-funciona'
+      preLoaderRoute: typeof PublicComoFuncionaRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/comunidad': {
+      id: '/_public/comunidad'
+      path: '/comunidad'
+      fullPath: '/comunidad'
+      preLoaderRoute: typeof PublicComunidadRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/comunidad-politecnica': {
+      id: '/_public/comunidad-politecnica'
+      path: '/comunidad-politecnica'
+      fullPath: '/comunidad-politecnica'
+      preLoaderRoute: typeof PublicComunidadPolitecnicaRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/contacto': {
+      id: '/_public/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof PublicContactoRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/explorar': {
+      id: '/_public/explorar'
+      path: '/explorar'
+      fullPath: '/explorar'
+      preLoaderRoute: typeof PublicExplorarRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/faq': {
+      id: '/_public/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof PublicFaqRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/ingresar': {
+      id: '/_public/ingresar'
+      path: '/ingresar'
+      fullPath: '/ingresar'
+      preLoaderRoute: typeof PublicIngresarRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/recuperar': {
+      id: '/_public/recuperar'
+      path: '/recuperar'
+      fullPath: '/recuperar'
+      preLoaderRoute: typeof PublicRecuperarRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/registro': {
+      id: '/_public/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof PublicRegistroRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/restablecer': {
+      id: '/_public/restablecer'
+      path: '/restablecer'
+      fullPath: '/restablecer'
+      preLoaderRoute: typeof PublicRestablecerRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/acreditaciones': {
+      id: '/admin/acreditaciones'
+      path: '/acreditaciones'
+      fullPath: '/admin/acreditaciones'
+      preLoaderRoute: typeof AdminAcreditacionesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/actividad': {
+      id: '/admin/actividad'
+      path: '/actividad'
+      fullPath: '/admin/actividad'
+      preLoaderRoute: typeof AdminActividadRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/auditoria': {
+      id: '/admin/auditoria'
+      path: '/auditoria'
+      fullPath: '/admin/auditoria'
+      preLoaderRoute: typeof AdminAuditoriaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/clases': {
+      id: '/admin/clases'
+      path: '/clases'
+      fullPath: '/admin/clases'
+      preLoaderRoute: typeof AdminClasesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/clases-particulares': {
+      id: '/admin/clases-particulares'
+      path: '/clases-particulares'
+      fullPath: '/admin/clases-particulares'
+      preLoaderRoute: typeof AdminClasesParticularesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/comunidad': {
+      id: '/admin/comunidad'
+      path: '/comunidad'
+      fullPath: '/admin/comunidad'
+      preLoaderRoute: typeof AdminComunidadRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/configuracion': {
+      id: '/admin/configuracion'
+      path: '/configuracion'
+      fullPath: '/admin/configuracion'
+      preLoaderRoute: typeof AdminConfiguracionRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/creditos': {
+      id: '/admin/creditos'
+      path: '/creditos'
+      fullPath: '/admin/creditos'
+      preLoaderRoute: typeof AdminCreditosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/habilidades': {
+      id: '/admin/habilidades'
+      path: '/habilidades'
+      fullPath: '/admin/habilidades'
+      preLoaderRoute: typeof AdminHabilidadesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/intercambios': {
+      id: '/admin/intercambios'
+      path: '/intercambios'
+      fullPath: '/admin/intercambios'
+      preLoaderRoute: typeof AdminIntercambiosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/mensajes': {
+      id: '/admin/mensajes'
+      path: '/mensajes'
+      fullPath: '/admin/mensajes'
+      preLoaderRoute: typeof AdminMensajesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/quejas': {
+      id: '/admin/quejas'
+      path: '/quejas'
+      fullPath: '/admin/quejas'
+      preLoaderRoute: typeof AdminQuejasRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reportes': {
+      id: '/admin/reportes'
+      path: '/reportes'
+      fullPath: '/admin/reportes'
+      preLoaderRoute: typeof AdminReportesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/retos': {
+      id: '/admin/retos'
+      path: '/retos'
+      fullPath: '/admin/retos'
+      preLoaderRoute: typeof AdminRetosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/usuarios': {
+      id: '/admin/usuarios'
+      path: '/usuarios'
+      fullPath: '/admin/usuarios'
+      preLoaderRoute: typeof AdminUsuariosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/acreditaciones': {
+      id: '/app/acreditaciones'
+      path: '/acreditaciones'
+      fullPath: '/app/acreditaciones'
+      preLoaderRoute: typeof AppAcreditacionesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/buscar': {
+      id: '/app/buscar'
+      path: '/buscar'
+      fullPath: '/app/buscar'
+      preLoaderRoute: typeof AppBuscarRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/calendario': {
+      id: '/app/calendario'
+      path: '/calendario'
+      fullPath: '/app/calendario'
+      preLoaderRoute: typeof AppCalendarioRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/clases-particulares': {
+      id: '/app/clases-particulares'
+      path: '/clases-particulares'
+      fullPath: '/app/clases-particulares'
+      preLoaderRoute: typeof AppClasesParticularesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/coincidencias': {
+      id: '/app/coincidencias'
+      path: '/coincidencias'
+      fullPath: '/app/coincidencias'
+      preLoaderRoute: typeof AppCoincidenciasRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/configuracion': {
+      id: '/app/configuracion'
+      path: '/configuracion'
+      fullPath: '/app/configuracion'
+      preLoaderRoute: typeof AppConfiguracionRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/creditos': {
+      id: '/app/creditos'
+      path: '/creditos'
+      fullPath: '/app/creditos'
+      preLoaderRoute: typeof AppCreditosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/intercambios': {
+      id: '/app/intercambios'
+      path: '/intercambios'
+      fullPath: '/app/intercambios'
+      preLoaderRoute: typeof AppIntercambiosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/mis-habilidades': {
+      id: '/app/mis-habilidades'
+      path: '/mis-habilidades'
+      fullPath: '/app/mis-habilidades'
+      preLoaderRoute: typeof AppMisHabilidadesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/notificaciones': {
+      id: '/app/notificaciones'
+      path: '/notificaciones'
+      fullPath: '/app/notificaciones'
+      preLoaderRoute: typeof AppNotificacionesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/pasaporte': {
+      id: '/app/pasaporte'
+      path: '/pasaporte'
+      fullPath: '/app/pasaporte'
+      preLoaderRoute: typeof AppPasaporteRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/perfil': {
+      id: '/app/perfil'
+      path: '/perfil'
+      fullPath: '/app/perfil'
+      preLoaderRoute: typeof AppPerfilRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/quejas': {
+      id: '/app/quejas'
+      path: '/quejas'
+      fullPath: '/app/quejas'
+      preLoaderRoute: typeof AppQuejasRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/quiero-aprender': {
+      id: '/app/quiero-aprender'
+      path: '/quiero-aprender'
+      fullPath: '/app/quiero-aprender'
+      preLoaderRoute: typeof AppQuieroAprenderRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/retos': {
+      id: '/app/retos'
+      path: '/retos'
+      fullPath: '/app/retos'
+      preLoaderRoute: typeof AppRetosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/solicitudes': {
+      id: '/app/solicitudes'
+      path: '/solicitudes'
+      fullPath: '/app/solicitudes'
+      preLoaderRoute: typeof AppSolicitudesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_public/legal/': {
+      id: '/_public/legal/'
+      path: '/legal'
+      fullPath: '/legal/'
+      preLoaderRoute: typeof PublicLegalIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/legal/$slug': {
+      id: '/_public/legal/$slug'
+      path: '/legal/$slug'
+      fullPath: '/legal/$slug'
+      preLoaderRoute: typeof PublicLegalSlugRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/app/persona/$id': {
+      id: '/app/persona/$id'
+      path: '/persona/$id'
+      fullPath: '/app/persona/$id'
+      preLoaderRoute: typeof AppPersonaIdRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
+interface PublicRouteChildren {
+  PublicComoFuncionaRoute: typeof PublicComoFuncionaRoute
+  PublicComunidadRoute: typeof PublicComunidadRoute
+  PublicComunidadPolitecnicaRoute: typeof PublicComunidadPolitecnicaRoute
+  PublicContactoRoute: typeof PublicContactoRoute
+  PublicExplorarRoute: typeof PublicExplorarRoute
+  PublicFaqRoute: typeof PublicFaqRoute
+  PublicIngresarRoute: typeof PublicIngresarRoute
+  PublicRecuperarRoute: typeof PublicRecuperarRoute
+  PublicRegistroRoute: typeof PublicRegistroRoute
+  PublicRestablecerRoute: typeof PublicRestablecerRoute
+  PublicIndexRoute: typeof PublicIndexRoute
+  PublicLegalSlugRoute: typeof PublicLegalSlugRoute
+  PublicLegalIndexRoute: typeof PublicLegalIndexRoute
+}
+
+const PublicRouteChildren: PublicRouteChildren = {
+  PublicComoFuncionaRoute: PublicComoFuncionaRoute,
+  PublicComunidadRoute: PublicComunidadRoute,
+  PublicComunidadPolitecnicaRoute: PublicComunidadPolitecnicaRoute,
+  PublicContactoRoute: PublicContactoRoute,
+  PublicExplorarRoute: PublicExplorarRoute,
+  PublicFaqRoute: PublicFaqRoute,
+  PublicIngresarRoute: PublicIngresarRoute,
+  PublicRecuperarRoute: PublicRecuperarRoute,
+  PublicRegistroRoute: PublicRegistroRoute,
+  PublicRestablecerRoute: PublicRestablecerRoute,
+  PublicIndexRoute: PublicIndexRoute,
+  PublicLegalSlugRoute: PublicLegalSlugRoute,
+  PublicLegalIndexRoute: PublicLegalIndexRoute,
+}
+
+const PublicRouteWithChildren =
+  PublicRoute._addFileChildren(PublicRouteChildren)
+
+interface AdminRouteChildren {
+  AdminAcreditacionesRoute: typeof AdminAcreditacionesRoute
+  AdminActividadRoute: typeof AdminActividadRoute
+  AdminAuditoriaRoute: typeof AdminAuditoriaRoute
+  AdminClasesRoute: typeof AdminClasesRoute
+  AdminClasesParticularesRoute: typeof AdminClasesParticularesRoute
+  AdminComunidadRoute: typeof AdminComunidadRoute
+  AdminConfiguracionRoute: typeof AdminConfiguracionRoute
+  AdminCreditosRoute: typeof AdminCreditosRoute
+  AdminHabilidadesRoute: typeof AdminHabilidadesRoute
+  AdminIntercambiosRoute: typeof AdminIntercambiosRoute
+  AdminMensajesRoute: typeof AdminMensajesRoute
+  AdminQuejasRoute: typeof AdminQuejasRoute
+  AdminReportesRoute: typeof AdminReportesRoute
+  AdminRetosRoute: typeof AdminRetosRoute
+  AdminUsuariosRoute: typeof AdminUsuariosRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAcreditacionesRoute: AdminAcreditacionesRoute,
+  AdminActividadRoute: AdminActividadRoute,
+  AdminAuditoriaRoute: AdminAuditoriaRoute,
+  AdminClasesRoute: AdminClasesRoute,
+  AdminClasesParticularesRoute: AdminClasesParticularesRoute,
+  AdminComunidadRoute: AdminComunidadRoute,
+  AdminConfiguracionRoute: AdminConfiguracionRoute,
+  AdminCreditosRoute: AdminCreditosRoute,
+  AdminHabilidadesRoute: AdminHabilidadesRoute,
+  AdminIntercambiosRoute: AdminIntercambiosRoute,
+  AdminMensajesRoute: AdminMensajesRoute,
+  AdminQuejasRoute: AdminQuejasRoute,
+  AdminReportesRoute: AdminReportesRoute,
+  AdminRetosRoute: AdminRetosRoute,
+  AdminUsuariosRoute: AdminUsuariosRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface AppRouteChildren {
+  AppAcreditacionesRoute: typeof AppAcreditacionesRoute
+  AppBuscarRoute: typeof AppBuscarRoute
+  AppCalendarioRoute: typeof AppCalendarioRoute
+  AppClasesParticularesRoute: typeof AppClasesParticularesRoute
+  AppCoincidenciasRoute: typeof AppCoincidenciasRoute
+  AppConfiguracionRoute: typeof AppConfiguracionRoute
+  AppCreditosRoute: typeof AppCreditosRoute
+  AppIntercambiosRoute: typeof AppIntercambiosRoute
+  AppMisHabilidadesRoute: typeof AppMisHabilidadesRoute
+  AppNotificacionesRoute: typeof AppNotificacionesRoute
+  AppPasaporteRoute: typeof AppPasaporteRoute
+  AppPerfilRoute: typeof AppPerfilRoute
+  AppQuejasRoute: typeof AppQuejasRoute
+  AppQuieroAprenderRoute: typeof AppQuieroAprenderRoute
+  AppRetosRoute: typeof AppRetosRoute
+  AppSolicitudesRoute: typeof AppSolicitudesRoute
+  AppIndexRoute: typeof AppIndexRoute
+  AppPersonaIdRoute: typeof AppPersonaIdRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAcreditacionesRoute: AppAcreditacionesRoute,
+  AppBuscarRoute: AppBuscarRoute,
+  AppCalendarioRoute: AppCalendarioRoute,
+  AppClasesParticularesRoute: AppClasesParticularesRoute,
+  AppCoincidenciasRoute: AppCoincidenciasRoute,
+  AppConfiguracionRoute: AppConfiguracionRoute,
+  AppCreditosRoute: AppCreditosRoute,
+  AppIntercambiosRoute: AppIntercambiosRoute,
+  AppMisHabilidadesRoute: AppMisHabilidadesRoute,
+  AppNotificacionesRoute: AppNotificacionesRoute,
+  AppPasaporteRoute: AppPasaporteRoute,
+  AppPerfilRoute: AppPerfilRoute,
+  AppQuejasRoute: AppQuejasRoute,
+  AppQuieroAprenderRoute: AppQuieroAprenderRoute,
+  AppRetosRoute: AppRetosRoute,
+  AppSolicitudesRoute: AppSolicitudesRoute,
+  AppIndexRoute: AppIndexRoute,
+  AppPersonaIdRoute: AppPersonaIdRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  PublicRoute: PublicRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

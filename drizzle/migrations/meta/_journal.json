@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1795473902001,
+      "tag": "0000_tiempo_libre_360_schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795473930772,
+      "tag": "0001_evidencias_storage_policies",
+      "breakpoints": true
+    }
+  ]
+}

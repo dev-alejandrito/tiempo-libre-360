@@ -7,7 +7,7 @@ import WhatsAppButton from "../../components/WhatsAppButton";
 
 import { api } from "../../lib/pb";
 import SocialLinks from "../../components/SocialLinks";
-import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL, CONTACT_EMAIL } from "../../lib/contact";
+import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL, CONTACT_EMAIL, gmailComposeUrl } from "../../lib/contact";
 
 function CopyButton({ value, label }) {
   const [ok, setOk] = useState(false);
@@ -52,7 +52,7 @@ export default function Contact() {
           <ul className="mt-4 space-y-3">
             <li className="flex flex-wrap items-center gap-2"><a className="flex min-h-11 items-center gap-3 font-semibold text-ink hover:underline" href={"tel:" + CONTACT_PHONE_TEL} target="_blank" rel="noopener noreferrer"><Phone size={20} aria-hidden="true" /> Teléfono: {CONTACT_PHONE_DISPLAY}</a><CopyButton value={CONTACT_PHONE_DISPLAY} label="Copiar teléfono" /></li>
             <li><WhatsAppButton /></li>
-            <li className="flex flex-wrap items-center gap-2"><a className="flex min-h-11 items-center gap-3 break-all font-semibold text-ink hover:underline" href={"mailto:" + CONTACT_EMAIL} target="_blank" rel="noopener noreferrer"><Mail size={20} aria-hidden="true" /> {CONTACT_EMAIL}</a><CopyButton value={CONTACT_EMAIL} label="Copiar correo" /></li>
+            <li className="flex flex-wrap items-center gap-2"><a className="flex min-h-11 items-center gap-3 break-all font-semibold text-ink hover:underline" href={gmailComposeUrl()} target="_blank" rel="noopener noreferrer"><Mail size={20} aria-hidden="true" /> {CONTACT_EMAIL}</a><CopyButton value={CONTACT_EMAIL} label="Copiar correo" /></li>
           </ul>
           <h3 className="mt-5 font-bold">Redes sociales</h3>
           <SocialLinks className="mt-2" empty={<p className="hint mt-2">Las redes sociales se mostrarán aquí en cuanto se configuren.</p>} />

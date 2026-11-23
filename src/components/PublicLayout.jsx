@@ -8,7 +8,7 @@ import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL } from "../lib/contact";
 import { Logo } from "./ui";
 import { useAuth } from "../lib/auth";
 import SocialLinks from "./SocialLinks";
-import { CONTACT_EMAIL } from "../lib/contact";
+import { CONTACT_EMAIL, gmailComposeUrl } from "../lib/contact";
 
 const NAV = [["/", "Inicio"], ["/como-funciona", "Cómo funciona"], ["/explorar", "Explorar habilidades"], ["/comunidad", "Comunidad"], ["/comunidad-politecnica", "Comunidad Politécnica"], ["/faq", "FAQ"], ["/contacto", "Contacto"]];
 
@@ -71,7 +71,7 @@ export default function PublicLayout({ children }) {
               <li><Link className="underline-offset-4 hover:underline" to="/ingresar">Iniciar sesión</Link></li>
             </ul>
             <p className="mt-6 text-sm text-[#d5deec]">Tel. <a className="underline underline-offset-4" href={"tel:" + CONTACT_PHONE_TEL}>{CONTACT_PHONE_DISPLAY}</a></p>
-            <p className="mt-1 text-sm text-[#d5deec]">Correo <a className="break-all underline underline-offset-4" href={"mailto:" + CONTACT_EMAIL} target="_blank" rel="noopener noreferrer">{CONTACT_EMAIL}</a></p>
+            <p className="mt-1 text-sm text-[#d5deec]">Correo <a className="break-all underline underline-offset-4" href={gmailComposeUrl()} target="_blank" rel="noopener noreferrer">{CONTACT_EMAIL}</a></p>
             <div className="mt-1 text-sm"><WhatsAppButton variant="footer">WhatsApp</WhatsAppButton></div>
             <SocialLinks footer className="mt-3" />
             <p className="mt-3 text-sm text-[#b9c6da]">{"\n"}</p>

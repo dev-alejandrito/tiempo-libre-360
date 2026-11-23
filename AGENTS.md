@@ -38,3 +38,4 @@ use the editor.
 - Uploaded evidence goes to the private `evidencias` bucket under `<user id>/...`; it is shown only through short-lived signed links created by the server. Why: evidence files are private.
 - Roles live only in `public.user_roles`; the owner admin role is granted by a database function after that email is confirmed. Why: prevents privilege escalation.
 - Private classes are paid directly between users outside the platform; never add payment gateways, card fields or payment confirmations. Why: owner requirement.
+- Account password fields use the shared PasswordInput control, preserving native input props and independent visibility state. Why: keeps login, registration and password changes consistent without changing authentication.

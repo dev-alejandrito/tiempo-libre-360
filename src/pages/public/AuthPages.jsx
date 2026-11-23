@@ -4,6 +4,7 @@ import { Alert, Field, Logo } from "../../components/ui";
 import { useAuth } from "../../lib/auth";
 import { errMsg } from "../../lib/pb";
 import { supabase } from "@/integrations/supabase/client";
+import PasswordInput from "../../components/PasswordInput";
 
 function Shell({ title, subtitle, children, footer }) {
   return (
@@ -41,7 +42,7 @@ export function Login() {
     <Shell title="Iniciar sesión" subtitle="Bienvenido de nuevo." footer={<>¿No tienes cuenta? <Link to="/registro" className="font-bold underline">Regístrate</Link></>}>
       <form onSubmit={submit} className="space-y-4">
         <Field label="Correo electrónico">{(p) => <input {...p} className="input" type="email" autoComplete="email" required value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} />}</Field>
-        <Field label="Contraseña">{(p) => <input {...p} className="input" type="password" autoComplete="current-password" required value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />}</Field>
+        <Field label="Contraseña">{(p) => <PasswordInput {...p} className="input" autoComplete="current-password" required value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />}</Field>
         {idle && !state.error && <Alert kind="info">Cerramos tu sesión por inactividad para proteger tu cuenta. Vuelve a iniciar sesión.</Alert>}
         {state.error && <Alert kind="error">{state.error}</Alert>}
         <button className="btn btn-primary w-full" disabled={state.busy}>{state.busy ? "Entrando…" : "Entrar"}</button>
@@ -85,7 +86,7 @@ export function Register() {
       <form onSubmit={submit} className="space-y-4" noValidate>
         <Field label="Nombre y apellido" error={errors.name}>{(p) => <input {...p} className="input" autoComplete="name" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} />}</Field>
         <Field label="Correo electrónico">{(p) => <input {...p} className="input" type="email" autoComplete="email" required value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} />}</Field>
-        <Field label="Contraseña" hint="Mínimo 8 caracteres." error={errors.password}>{(p) => <input {...p} className="input" type="password" autoComplete="new-password" value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />}</Field>
+        <Field label="Contraseña" hint="Mínimo 8 caracteres." error={errors.password}>{(p) => <PasswordInput {...p} className="input" autoComplete="new-password" value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />}</Field>
         <div>
           <label className="flex items-start gap-3"><input type="checkbox" className="mt-1 h-5 w-5" checked={f.agree} onChange={(e) => setF({ ...f, agree: e.target.checked })} aria-invalid={errors.agree ? "true" : undefined} /><span className="text-sm">Acepto tratar a todas las personas con respeto, no usar dinero real en los intercambios y que mis datos se usen para conectar con la comunidad. He leído el <Link to="/legal/privacidad" target="_blank" className="font-bold underline">Aviso de privacidad</Link>, los <Link to="/legal/terminos" target="_blank" className="font-bold underline">Términos y condiciones</Link>, las <Link to="/legal/convivencia" target="_blank" className="font-bold underline">Normas de convivencia</Link> y la información sobre <Link to="/legal/creditos" target="_blank" className="font-bold underline">créditos</Link>.</span></label>
           {errors.agree && <p className="mt-1 text-sm font-semibold text-danger">{errors.agree}</p>}
@@ -145,8 +146,8 @@ export function ResetPassword() {
       {state.ok ? <Alert kind="info">Contraseña actualizada. Ya puedes iniciar sesión.</Alert> : (
         <form onSubmit={submit} className="space-y-4">
           {!ready && <Alert kind="info">Abre esta página desde el enlace que te enviamos por correo. Si ya lo hiciste y no avanza, solicita un enlace nuevo.</Alert>}
-          <Field label="Contraseña nueva">{(p) => <input {...p} className="input" type="password" autoComplete="new-password" required minLength={8} value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />}</Field>
-          <Field label="Confirmar contraseña">{(p) => <input {...p} className="input" type="password" autoComplete="new-password" required minLength={8} value={f.confirm} onChange={(e) => setF({ ...f, confirm: e.target.value })} />}</Field>
+          <Field label="Contraseña nueva">{(p) => <PasswordInput {...p} className="input" autoComplete="new-password" required minLength={8} value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />}</Field>
+          <Field label="Confirmar contraseña">{(p) => <PasswordInput {...p} className="input" autoComplete="new-password" required minLength={8} value={f.confirm} onChange={(e) => setF({ ...f, confirm: e.target.value })} />}</Field>
           {state.error && <Alert kind="error">{state.error}</Alert>}
           <button className="btn btn-primary w-full" disabled={state.busy || !ready}>{state.busy ? "Guardando…" : "Cambiar contraseña"}</button>
         </form>

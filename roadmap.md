@@ -8,5 +8,6 @@
 - [x] Chat privado para acordar clases personalizadas (sin pagos)
 - [x] Admin: ortizcallesjoahann@gmail.com (se activa al registrarse y confirmar ese correo)
 - [x] Pruebas de extremo a extremo
+- [x] Mostrar y ocultar contraseñas en ingreso, registro, recuperación y configuración; comprobado en computadora y celular
 - [ ] Datos existentes de PocketBase — espera exportación del usuario
 - [ ] Publicar — espera autorización del usuario

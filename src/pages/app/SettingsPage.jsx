@@ -4,6 +4,7 @@ import { Alert, Field, PageHeader, useToast } from "../../components/ui";
 import { useAuth } from "../../lib/auth";
 import { api, errMsg } from "../../lib/pb";
 import { supabase } from "@/integrations/supabase/client";
+import PasswordInput from "../../components/PasswordInput";
 
 export default function SettingsPage() {
   const { me, logout, refresh } = useAuth();
@@ -47,9 +48,9 @@ export default function SettingsPage() {
           <h2 className="text-xl font-bold">Seguridad</h2>
           <p className="hint">Elige una contraseña personal y permanente: la usarás siempre con tu correo para entrar. Se guarda cifrada y nadie, ni la administración, puede verla.</p>
           <h3 className="font-bold">Cambiar contraseña</h3>
-          <Field label="Contraseña actual">{(p) => <input {...p} className="input" type="password" autoComplete="current-password" required value={pw.old} onChange={(e) => setPw({ ...pw, old: e.target.value })} />}</Field>
-          <Field label="Nueva contraseña" hint="Mínimo 8 caracteres.">{(p) => <input {...p} className="input" type="password" autoComplete="new-password" required value={pw.next} onChange={(e) => setPw({ ...pw, next: e.target.value })} />}</Field>
-          <Field label="Repite la nueva contraseña">{(p) => <input {...p} className="input" type="password" autoComplete="new-password" required value={pw.again} onChange={(e) => setPw({ ...pw, again: e.target.value })} />}</Field>
+          <Field label="Contraseña actual">{(p) => <PasswordInput {...p} className="input" autoComplete="current-password" required value={pw.old} onChange={(e) => setPw({ ...pw, old: e.target.value })} />}</Field>
+          <Field label="Nueva contraseña" hint="Mínimo 8 caracteres.">{(p) => <PasswordInput {...p} className="input" autoComplete="new-password" required value={pw.next} onChange={(e) => setPw({ ...pw, next: e.target.value })} />}</Field>
+          <Field label="Repite la nueva contraseña">{(p) => <PasswordInput {...p} className="input" autoComplete="new-password" required value={pw.again} onChange={(e) => setPw({ ...pw, again: e.target.value })} />}</Field>
           {pwErr && <Alert kind="error">{pwErr}</Alert>}
           <button className="btn btn-dark" disabled={busy === "pw"}>Actualizar contraseña</button>
         </form>

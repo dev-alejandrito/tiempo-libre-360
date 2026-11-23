@@ -74,7 +74,7 @@ export default function PublicLayout({ children }) {
             <p className="mt-1 text-sm text-[#d5deec]">Correo <a className="break-all underline underline-offset-4" href={"mailto:" + CONTACT_EMAIL} target="_blank" rel="noopener noreferrer">{CONTACT_EMAIL}</a></p>
             <div className="mt-1 text-sm"><WhatsAppButton variant="footer">WhatsApp</WhatsAppButton></div>
             <SocialLinks footer className="mt-3" />
-            <p className="mt-3 text-sm text-[#b9c6da]">No es una tienda: aquí no se paga con dinero. Todos pueden participar, sin certificados.</p>
+            <p className="mt-3 text-sm text-[#b9c6da]">{"\n"}</p>
           </nav>
           <nav aria-label="Información legal">
             <h2 className="mb-3 text-lg font-bold">Legal y confianza</h2>

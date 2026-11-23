@@ -43,7 +43,8 @@ export const NavLink = forwardRef(function NavLink({ to, end, className, style, 
   const cls = typeof className === "function" ? className({ isActive }) : className;
   const st = typeof style === "function" ? style({ isActive }) : style;
   return (
-    <Link ref={ref} to={to} className={cls} style={st} aria-current={isActive ? "page" : undefined} {...rest}>
+    <Link ref={ref} to={to} className={cls} style={st} aria-current={isActive ? "page" : undefined}
+      activeProps={{}} inactiveProps={{}} activeOptions={{ exact: !!(end || target === "/"), includeSearch: false }} {...rest}>
       {typeof children === "function" ? children({ isActive }) : children}
     </Link>
   );

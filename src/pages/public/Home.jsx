@@ -21,7 +21,7 @@ function Ring() {
 }
 
 const STEPS = [
-  [Users, "Cuenta lo que sabes", "Registra las habilidades que ofreces y las que quieres aprender, con tu nivel y disponibilidad. Sin certificados ni pruebas."],
+  [Users, "Comparte lo que sabes", "Registra las habilidades que ofreces y las que quieres aprender, con tu nivel y disponibilidad. Sin certificados ni pruebas."],
   [Sparkles, "Encuentra coincidencias", "Te recomendamos personas según habilidades, nivel, modalidad, horarios y cercanía, siempre explicándote el motivo."],
   [Repeat, "Intercambia tiempo", "Solicita una sesión, acuerda el horario y, cuando ambos confirman, los créditos pasan de quien aprende a quien enseña."],
 ];

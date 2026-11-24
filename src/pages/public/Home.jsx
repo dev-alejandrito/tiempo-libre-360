@@ -41,7 +41,7 @@ export default function Home() {
               <Link to="/registro" className="btn btn-primary">Crear mi cuenta gratis <ArrowRight size={18} aria-hidden="true" /></Link>
               <Link to="/explorar" className="btn btn-light">Explorar habilidades</Link>
             </div>
-            <p className="mt-4 text-sm text-[#b9c6da]">Recibes créditos de bienvenida al registrarte. Sin tarjeta, sin tienda.</p>
+            <p className="mt-4 text-sm text-[#b9c6da]">Recibes créditos de bienvenida al registrarte.</p>
           </div>
           <div className="rise mx-auto aspect-square w-full max-w-sm" style={{ animationDelay: ".15s" }}><Ring /></div>
         </div>

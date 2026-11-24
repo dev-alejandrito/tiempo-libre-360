@@ -83,7 +83,7 @@ export default function PublicLayout({ children }) {
             </ul>
           </nav>
         </div>
-        <div className="border-t border-white/15 py-4 text-center text-sm text-[#b9c6da]">© {new Date().getFullYear()} TIEMPO LIBRE 360 — Banco de tiempo comunitario · Iniciativa independiente, no es una plataforma oficial del IPN</div>
+        <div className="border-t border-white/15 py-4 text-center text-sm text-[#b9c6da]">© {new Date().getFullYear()} TIEMPO LIBRE 360 — Banco de tiempo comunitario</div>
       </footer>
     </div>
   );

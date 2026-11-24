@@ -3,7 +3,7 @@ import SettingsPage from "@/pages/app/SettingsPage";
 import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/app/configuracion")({
-  head: () => ({ meta: pageMeta('Configuración', 'Tu cuenta, contraseña y avisos por WhatsApp o SMS.') }),
+  head: () => ({ meta: pageMeta('Configuración', 'Tu cuenta y tu contraseña.') }),
   component: RoutePage,
 });
 

@@ -2,7 +2,7 @@ import { MapPin, Flag, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "@/lib/router";
 
-import { Alert, Avatar, Field, Modal, PageHeader, Spinner, Stars, VerifiedBadge, useToast } from "../../components/ui";
+import { Alert, Avatar, Field, Modal, PageHeader, Spinner, Stars, UserVerifiedBadge, VerifiedBadge, useToast } from "../../components/ui";
 import { AvailabilityView } from "../../components/AvailabilityEditor";
 import RequestModal from "../../components/RequestModal";
 import { PassportStats } from "./Passport";
@@ -25,7 +25,7 @@ export default function PersonPage() {
       <div className="card-dark dark-surface mb-6 flex flex-wrap items-center gap-4">
         <Avatar name={p.name} size={72} />
         <div className="min-w-0 flex-1">
-          <h1 className="text-3xl font-extrabold">{p.name}</h1>
+          <h1 className="text-3xl font-extrabold">{p.name}<UserVerifiedBadge show={p.userVerified} /></h1>
           <p className="text-[#d5deec]">{p.headline || "Miembro de la comunidad"}</p>
           <div className="mt-2 flex flex-wrap gap-2 text-sm">
             {(p.distance || p.city) && <span className="chip chip-ok"><MapPin size={12} aria-hidden="true" />{p.distance || p.city}</span>}

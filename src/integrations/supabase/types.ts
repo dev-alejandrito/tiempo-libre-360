@@ -725,6 +725,8 @@ export type Database = {
           share_location: boolean
           status: string
           updated: string
+          verified_at: string | null
+          verified_by: string | null
         }
         Insert: {
           availability?: Json
@@ -743,6 +745,8 @@ export type Database = {
           share_location?: boolean
           status?: string
           updated?: string
+          verified_at?: string | null
+          verified_by?: string | null
         }
         Update: {
           availability?: Json
@@ -761,6 +765,8 @@ export type Database = {
           share_location?: boolean
           status?: string
           updated?: string
+          verified_at?: string | null
+          verified_by?: string | null
         }
         Relationships: []
       }

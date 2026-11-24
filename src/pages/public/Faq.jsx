@@ -10,7 +10,7 @@ const Q = [
   ["¿Qué pasa si la otra persona no aparece?", "Cualquiera de las partes puede abrir un conflicto una vez pasada la hora de la sesión. Moderación revisa y decide: devolver los créditos o liberarlos."],
   ["¿Mi dirección es visible?", "Nunca. Si decides compartir tu ubicación, solo mostramos una zona aproximada (alrededor de 1 km) a personas que también la comparten. Puedes desactivarlo cuando quieras."],
   ["¿Cómo funcionan las recomendaciones?", "Comparamos lo que quieres aprender con lo que otras personas ofrecen, y tenemos en cuenta nivel, modalidad, horarios y cercanía. Cada recomendación indica sus motivos."],
-  ["¿Recibiré avisos?", "Sí: notificaciones dentro de la plataforma. Además puedes dejar tu teléfono para avisos por WhatsApp o SMS cuando la comunidad los active."],
+  ["¿Recibiré avisos?", "Sí: notificaciones dentro de la plataforma."],
   ["¿Cómo se moderan los contenidos?", "Puedes reportar a cualquier persona. El equipo de moderación revisa los reportes, puede ocultar contenido y suspender cuentas, y todas sus acciones quedan auditadas."],
 ];
 

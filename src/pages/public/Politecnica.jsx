@@ -1,6 +1,5 @@
 import { Link } from "@/lib/router";
 import { PageHeader } from "../../components/ui";
-import WhatsAppButton from "../../components/WhatsAppButton";
 import SocialLinks from "../../components/SocialLinks";
 import { CONTACT_EMAIL, gmailComposeUrl } from "../../lib/contact";
 
@@ -58,7 +57,6 @@ export default function Politecnica() {
           <p className="mt-2 text-slate-700">Escríbenos para dudas, ideas o para sumar tu grupo o academia.</p>
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <a className="btn btn-ghost min-h-11" href={gmailComposeUrl()} target="_blank" rel="noopener noreferrer">Enviar correo</a>
-            <WhatsAppButton />
           </div>
           <SocialLinks className="mt-3" />
         </div>

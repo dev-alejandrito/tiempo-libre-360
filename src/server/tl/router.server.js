@@ -33,6 +33,7 @@ const ROUTES = [
   ["GET", "/admin/classes", "staff", () => M.adminClasses()],
   ["POST", "/admin/user/:id/role", "admin", ({ me, p, body }) => M.adminRole(me, p.id, body)],
   ["POST", "/admin/user/:id/status", "staff", ({ me, p, body }) => M.adminStatus(me, p.id, body)],
+  ["POST", "/admin/user/:id/verify", "admin", ({ me, p, body }) => M.adminVerify(me, p.id, body)],
   ["POST", "/admin/user/:id/credits", "admin", ({ me, p, body }) => M.adminCredits(me, p.id, body)],
   ["POST", "/admin/skill/:id/hide", "staff", ({ me, p, body }) => M.adminSkillHide(me, p.id, body)],
   ["POST", "/admin/report/:id/resolve", "staff", ({ me, p, body }) => M.adminReportResolve(me, p.id, body)],

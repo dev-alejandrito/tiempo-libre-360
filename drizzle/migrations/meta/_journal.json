@@ -29,6 +29,13 @@
       "when": 1795476030185,
       "tag": "0003_restrict_site_settings_read",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795564702150,
+      "tag": "0004_migration",
+      "breakpoints": true
     }
   ]
 }

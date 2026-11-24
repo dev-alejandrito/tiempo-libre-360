@@ -1,7 +1,7 @@
 import { MapPin } from "lucide-react";
 import { Link } from "@/lib/router";
 
-import { Avatar, Stars, VerifiedBadge } from "./ui";
+import { Avatar, Stars, UserVerifiedBadge, VerifiedBadge } from "./ui";
 import { LEVELS, MODES } from "../lib/util";
 
 export default function SkillResult({ item, authed, onRequest }) {
@@ -13,7 +13,7 @@ export default function SkillResult({ item, authed, onRequest }) {
         <Avatar name={person.name} />
         <div className="min-w-0 flex-1">
           <h3 className="truncate text-lg font-bold">{skill.name}</h3>
-          <p className="text-sm text-[#3c3829]">{person.name}{person.headline ? ` · ${person.headline}` : ""}</p>
+          <p className="text-sm text-[#3c3829]">{person.name}<UserVerifiedBadge show={person.userVerified} />{person.headline ? ` · ${person.headline}` : ""}</p>
         </div>
       </div>
       {skill.description && <p className="line-clamp-3 text-[#3c3829]">{skill.description}</p>}

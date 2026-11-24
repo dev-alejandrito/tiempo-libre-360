@@ -25,7 +25,6 @@ export function LegalIndex() {
       <ul className="mt-8 grid gap-4 sm:grid-cols-2">
         {LEGAL.map((d) => <li key={d.slug} className="card"><h2 className="text-xl font-bold"><Link to={"/legal/" + d.slug} className="underline underline-offset-4">{d.title}</Link></h2><p className="mt-1 text-[#3c3829]">{d.intro}</p></li>)}
       </ul>
-      <p className="mt-8 rounded-xl border border-[#9fd0cd] bg-[#d8eeee] p-4 text-[#0a3f3c]">TIEMPO LIBRE 360 es una iniciativa comunitaria independiente. No es una plataforma oficial del IPN.</p>
     </div>
   );
 }
@@ -54,7 +53,6 @@ export function LegalDoc() {
           ))}
         </div>
       </div>
-      <p className="mt-10 rounded-xl border border-[#9fd0cd] bg-[#d8eeee] p-4 text-[#0a3f3c]">TIEMPO LIBRE 360 no es una plataforma oficial del IPN ni cuenta con su respaldo. ¿Dudas? <Link to="/contacto" className="font-bold underline">Escríbenos</Link>.</p>
     </div>
   );
 }

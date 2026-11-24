@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Field, Modal, PageHeader, Pagination, Spinner, useToast } from "../../components/ui";
+import { Alert, Field, Modal, PageHeader, Pagination, Spinner, UserVerifiedBadge, useToast } from "../../components/ui";
 import { ReasonModal } from "../../components/AdminBits";
 import { useList } from "../../lib/hooks";
 import { useAuth } from "../../lib/auth";
@@ -43,6 +43,9 @@ export default function AdminUsers() {
   async function setRole(m, role) {
     try { await api(`/admin/user/${m.id}/role`, { method: "POST", body: { role } }); toast("Rol actualizado."); reload(); } catch (err) { toast(err.message, "error"); reload(); }
   }
+  async function verify(m, verified) {
+    try { await api(`/admin/user/${m.id}/verify`, { method: "POST", body: { verified } }); toast(verified ? "Usuario verificado." : "Verificación retirada."); reload(); } catch (err) { toast(err.message, "error"); }
+  }
   async function activate(m) {
     try { await api(`/admin/user/${m.id}/status`, { method: "POST", body: { status: "active" } }); toast("Cuenta reactivada."); reload(); } catch (err) { toast(err.message, "error"); }
   }
@@ -59,12 +62,13 @@ export default function AdminUsers() {
               <tr key={m.id}>
                 <td><strong>{m.name}</strong><br /><span className="text-sm">{m.email || "(correo oculto)"}</span></td>
                 <td>{isAdmin && m.id !== me.id ? <><label className="sr-only" htmlFor={`r${m.id}`}>Rol de {m.name}</label><select id={`r${m.id}`} className="input !min-h-9 !w-40 !py-1" value={m.role || "user"} onChange={(e) => setRole(m, e.target.value)}>{Object.entries(ROLES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></> : <span className="chip">{ROLES[m.role || "user"]}</span>}</td>
-                <td>{m.status === "suspended" ? <span className="chip chip-bad">Suspendida</span> : <span className="chip chip-ok">Activa</span>}</td>
+                <td>{m.status === "suspended" ? <span className="chip chip-bad">Suspendida</span> : <span className="chip chip-ok">Activa</span>}<UserVerifiedBadge show={!!m.verified_at && m.status === "active"} /></td>
                 <td className="num">{wmap[m.id] ? `${wmap[m.id].available} / ${wmap[m.id].reserved}` : "—"}</td>
                 <td className="whitespace-nowrap">{fmtDate(m.created)}</td>
                 <td><div className="flex flex-wrap gap-1.5">
                   {m.id !== me.id && (m.status === "suspended" ? <button type="button" className="btn btn-ghost btn-sm" onClick={() => activate(m)}>Reactivar</button> : <button type="button" className="btn btn-danger btn-sm" onClick={() => setModal({ t: "suspend", m })}>Suspender</button>)}
                   {isAdmin && <button type="button" className="btn btn-ghost btn-sm" onClick={() => setModal({ t: "credits", m })}>Créditos</button>}
+                  {isAdmin && m.id !== me.id && (m.verified_at ? <button type="button" className="btn btn-ghost btn-sm" onClick={() => verify(m, false)}>Quitar verificación</button> : m.status !== "suspended" && <button type="button" className="btn btn-ghost btn-sm" onClick={() => verify(m, true)}>Verificar usuario</button>)}
                 </div></td>
               </tr>))}</tbody>
           </table></div>

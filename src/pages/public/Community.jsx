@@ -2,7 +2,7 @@ import { Trophy, MessageCircleHeart as MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@/lib/router";
 
-import { Alert, Avatar, Empty, PageHeader, Spinner, useToast } from "../../components/ui";
+import { Alert, Avatar, Empty, UserVerifiedBadge, PageHeader, Spinner, useToast } from "../../components/ui";
 import { useApi } from "../../lib/hooks";
 import { useAuth } from "../../lib/auth";
 import { errMsg, pb } from "../../lib/pb";
@@ -46,7 +46,7 @@ export default function Community() {
               <article key={p.id} className="card flex gap-3">
                 <Avatar name={p.author} />
                 <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2"><h3 className="font-bold">{p.author}</h3><span className="chip chip-info">{KINDS[p.kind]}</span><span className="text-sm text-[#4b4638]">{fmtDate(p.created)}</span></div>
+                  <div className="flex flex-wrap items-center gap-2"><h3 className="font-bold">{p.author}<UserVerifiedBadge show={p.authorVerified} /></h3><span className="chip chip-info">{KINDS[p.kind]}</span><span className="text-sm text-[#4b4638]">{fmtDate(p.created)}</span></div>
                   <p className="mt-1 whitespace-pre-wrap break-words">{p.body}</p>
                 </div>
               </article>

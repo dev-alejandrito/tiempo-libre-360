@@ -2,7 +2,7 @@ import { HeartHandshake, MapPin, Check } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@/lib/router";
 
-import { Alert, Avatar, Empty, PageHeader, Spinner, Stars } from "../../components/ui";
+import { Alert, Avatar, Empty, PageHeader, Spinner, Stars, UserVerifiedBadge } from "../../components/ui";
 import RequestModal from "../../components/RequestModal";
 import { useApi } from "../../lib/hooks";
 import { LEVELS, MODES } from "../../lib/util";
@@ -16,7 +16,7 @@ export function MatchCard({ m, onRequest }) {
       <div className="flex items-start gap-3">
         <Avatar name={m.name} />
         <div className="min-w-0 flex-1">
-          <h3 className="truncate text-lg font-bold">{m.name}</h3>
+          <h3 className="truncate text-lg font-bold">{m.name}<UserVerifiedBadge show={m.userVerified} /></h3>
           <p className="truncate text-sm text-[#3c3829]">{m.headline || "Miembro de la comunidad"}</p>
         </div>
         <div className="text-right"><div className="num text-2xl font-bold leading-none">{m.score}<span className="text-sm">%</span></div><div className="text-xs font-semibold">afinidad</div></div>

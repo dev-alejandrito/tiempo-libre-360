@@ -202,6 +202,12 @@ export function Avatar({ name = "?", size = 44 }) {
   return <span aria-hidden="true" className="grid shrink-0 place-items-center rounded-full bg-ink font-display font-bold text-amber" style={{ width: size, height: size, fontSize: size * 0.38 }}>{initials}</span>;
 }
 
+// Insignia de persona verificada por la administración (distinta de la verificación de habilidades).
+export function UserVerifiedBadge({ show }) {
+  if (!show) return null;
+  return <span className="chip chip-ok ml-1.5 align-middle !text-xs" title="Usuario verificado por la administración de TIEMPO LIBRE 360"><Star size={12} fill="currentColor" aria-hidden="true" />Usuario verificado</span>;
+}
+
 // Insignia que solo aparece cuando la administración aprobó la verificación de la habilidad.
 export function VerifiedBadge({ small = false }) {
   return <span className="chip chip-ok" title="Habilidad verificada por la administración (video y certificado revisados)"><BadgeCheck size={small ? 12 : 14} aria-hidden="true" />Verificada</span>;

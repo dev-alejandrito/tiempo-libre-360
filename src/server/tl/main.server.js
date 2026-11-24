@@ -46,6 +46,7 @@ export async function approvedMap(memberIds) {
   rows.forEach((r) => { (out[r.member] = out[r.member] || new Set()).add(norm(r.skill_name)); });
   return out;
 }
+export const userVerified = (m) => !!(m && m.verified_at && m.status === "active");
 const isVerified = (amap, memberId, name) => !!(amap[memberId] && amap[memberId].has(norm(name)));
 
 export async function personView(me, id) {
@@ -70,7 +71,7 @@ export async function personView(me, id) {
   const accs = await q(db.from("accreditations").select("skill_name, title, kind, reviewed_at").eq("member", id).eq("status", "approved").order("reviewed_at", { ascending: false }).limit(30));
   return {
     accreditations: accs.map((a) => ({ skill_name: a.skill_name, title: a.title, kind: a.kind, verified: true })),
-    id: m.id, name: id === me.id ? m.name : displayName(m.name), headline: m.headline, bio: m.bio,
+    id: m.id, name: id === me.id ? m.name : displayName(m.name), userVerified: userVerified(m), headline: m.headline, bio: m.bio,
     city: share ? m.city : "", distance: dist, joined: m.created,
     offers: sk.filter((s) => s.kind === "offer").map(view),
     wants: sk.filter((s) => s.kind === "want").map(view),
@@ -146,7 +147,7 @@ export async function matches(me) {
     const rt = rmap[m.id]; const avg = rt ? round1(rt.sum / rt.n) : 0;
     if (avg >= 4.5) score += 3;
     out.push({
-      id: m.id, name: displayName(m.name), headline: m.headline, city: m.share_location ? m.city : "",
+      id: m.id, name: displayName(m.name), userVerified: userVerified(m), headline: m.headline, city: m.share_location ? m.city : "",
       distance: dlabel, score: Math.min(99, Math.round(score)), reasons, kind: learn && teach ? "mutual" : learn ? "learn" : "teach",
       learn: learn ? skillBrief(learn.o) : null, teach: teach ? skillBrief(teach.w) : null, overlap: ov, ratingAvg: avg, ratingCount: rt ? rt.n : 0,
     });
@@ -184,7 +185,7 @@ export async function peopleSearch(me, qy) {
     const rt = rmap[m.id];
     out.push({
       skill: { id: s.id, name: s.name, category: s.category, description: s.description, level: s.level, mode: s.mode, durations: skillDurations(s), verified: isVerified(amap, m.id, s.name) },
-      person: { id: m.id, name: displayName(m.name), headline: m.headline, city: m.share_location ? m.city : "", ratingAvg: rt ? round1(rt.sum / rt.n) : 0, ratingCount: rt ? rt.n : 0 },
+      person: { id: m.id, name: displayName(m.name), userVerified: userVerified(m), headline: m.headline, city: m.share_location ? m.city : "", ratingAvg: rt ? round1(rt.sum / rt.n) : 0, ratingCount: rt ? rt.n : 0 },
       distance: dist === null ? null : distLabel(dist), _d: dist === null ? 99999 : dist, lat, lng,
     });
   });
@@ -530,7 +531,7 @@ export async function publicCommunity() {
   const mm = await membersMap(posts.map((p) => p.author));
   const ch = await q(db.from("challenges").select("*").eq("active", true).order("target", { ascending: true }).limit(20));
   return {
-    posts: posts.map((p) => ({ id: p.id, kind: p.kind, body: p.body, author: mm[p.author] ? displayName(mm[p.author].name) : "Miembro", authorId: p.author, created: p.created })),
+    posts: posts.map((p) => ({ id: p.id, kind: p.kind, body: p.body, author: mm[p.author] ? displayName(mm[p.author].name) : "Miembro", authorVerified: userVerified(mm[p.author]), authorId: p.author, created: p.created })),
     challenges: ch.map((c) => ({ id: c.id, title: c.title, description: c.description, target: Number(c.target), reward: Number(c.reward), badge: c.badge })),
     stats: await publicStats(),
   };
@@ -631,7 +632,7 @@ export async function report(me, b) {
 }
 export async function savePhone(me, b) {
   const phone = str(b.phone, 20).replace(/[\s-]/g, "");
-  if (phone && !/^\+\d{7,15}$/.test(phone)) fail("Escribe el teléfono con prefijo internacional, por ejemplo +525536776271.");
+  if (phone && !/^\+\d{7,15}$/.test(phone)) fail("Escribe el teléfono con prefijo internacional (+ y de 7 a 15 dígitos).");
   await q(db.from("members").update({ phone, notify_whatsapp: phone ? !!b.whatsapp : false, notify_sms: phone ? !!b.sms : false }).eq("id", me.id));
   return { ok: true };
 }
@@ -646,7 +647,7 @@ export async function contact(b) {
   const same = await q(db.from("contact_messages").select("id").eq("email", email).eq("message", message).gt("created", dayAgo).limit(1));
   if (same.length) return { ok: true, duplicate: true };
   const allRecent = await q(db.from("contact_messages").select("id").gt("created", hourAgo).limit(60));
-  if (allRecent.length >= 40) fail("Estamos recibiendo muchos mensajes en este momento. Inténtalo de nuevo en un rato o escríbenos por WhatsApp.", 429);
+  if (allRecent.length >= 40) fail("Estamos recibiendo muchos mensajes en este momento. Inténtalo de nuevo en un rato o escríbenos por correo.", 429);
   const recent = await q(db.from("contact_messages").select("id").eq("email", email).gt("created", hourAgo).limit(10));
   if (recent.length >= 3) fail("Ya recibimos varios mensajes tuyos. Te responderemos pronto.", 429);
   await q(db.from("contact_messages").insert({ name, email, subject, message, status: "new" }));
@@ -680,6 +681,17 @@ export async function adminStatus(me, id, b) {
   const { error } = await db.auth.admin.updateUserById(m.id, { ban_duration: status === "suspended" ? "876000h" : "none" });
   if (error) console.error("ban update failed", error);
   await audit(me, "user." + status, "member:" + m.id, m.name + " — " + reason);
+  return { ok: true };
+}
+export async function adminVerify(me, id, b) {
+  if (me.role !== "admin") fail("Solo la administración puede verificar usuarios.", 403);
+  const m = await getMember(id); if (!m) fail("Usuario no encontrado.", 404);
+  if (m.id === me.id) fail("No puedes verificar tu propia cuenta.", 403);
+  const on = !!b.verified;
+  if (on && m.status !== "active") fail("No se puede verificar una cuenta suspendida.");
+  await q(db.from("members").update({ verified_at: on ? new Date().toISOString() : null, verified_by: on ? me.id : null }).eq("id", m.id));
+  await audit(me, on ? "user.verify" : "user.unverify", "member:" + m.id, m.name);
+  if (on) await notify(m.id, "verified", "Tu cuenta fue verificada por la administración", "Ahora aparece la insignia de usuario verificado junto a tu nombre.", "/app/perfil");
   return { ok: true };
 }
 export async function adminCredits(me, id, b) {

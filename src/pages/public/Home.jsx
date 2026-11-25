@@ -76,7 +76,7 @@ export default function Home() {
             <h2 className="text-3xl font-extrabold md:text-4xl">Confianza por diseño</h2>
             <p className="mt-3 text-[#3c3829]">Tu tiempo y tu privacidad están protegidos en cada paso.</p>
             <ul className="mt-6 space-y-4">
-              {[[ShieldCheck, "Créditos protegidos", "Los créditos se reservan al pedir una sesión y solo se liberan cuando ambas personas confirman. Nunca hay saldos negativos."], [MapPin, "Cercanía sin revelar tu casa", "Solo si das tu consentimiento mostramos tu zona aproximada (alrededor de 1 km), nunca tu domicilio."], [HandHeart, "Todos pueden participar", "Pedimos títulos, fotos de documentos y pruebas. Tu reputación se construye en base a tu perfil certificado, minutos compartidos y valoraciones."]].map(([Icon, t, d]) => (
+              {[[ShieldCheck, "Créditos protegidos", "Los créditos se reservan al solicitar un intercambio y se transfieren cuando ambas personas confirman que la sesión se completó. No permitimos saldos negativos ni cobros duplicados."], [MapPin, "Cercanía sin revelar tu casa", "Solo si das tu consentimiento mostramos tu zona aproximada (alrededor de 1 km), nunca tu domicilio."], [HandHeart, "Todos pueden participar", "Pedimos títulos, fotos de documentos y pruebas. Tu reputación se construye en base a tu perfil certificado, minutos compartidos y valoraciones."]].map(([Icon, t, d]) => (
                 <li key={t} className="flex gap-3"><span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-ink text-mint"><Icon size={22} aria-hidden="true" /></span><div><h3 className="font-bold">{t}</h3><p className="text-[#3c3829]">{d}</p></div></li>
               ))}
             </ul>

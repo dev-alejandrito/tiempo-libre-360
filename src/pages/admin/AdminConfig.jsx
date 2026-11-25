@@ -74,17 +74,6 @@ export default function AdminConfig() {
             <h2 className="text-xl font-bold">Correo electrónico</h2>
             <Alert kind="warn">El envío de correos todavía no está activado en tu paquete de alojamiento, por eso las notificaciones se muestran dentro de la plataforma y los mensajes de contacto se guardan en <strong>Mensajes de contacto</strong>. Cuando el alojamiento tenga una dirección de envío, se podrá activar.</Alert>
           </section>
-          <form onSubmit={saveInt} className="card space-y-4">
-            <h2 className="text-xl font-bold">WhatsApp y SMS (Twilio)</h2>
-            <Alert kind={int.configured ? "ok" : "info"}>{int.configured ? `Cuenta conectada (${int.sid_hint}). Para cambiarla escribe nuevos datos.` : "Aún no hay cuenta conectada. Necesitas tres datos de tu cuenta de Twilio: Account SID, Auth Token y un número emisor."}</Alert>
-            <Field label="Account SID">{(p) => <input {...p} className="input" autoComplete="off" value={form.twilio_sid} onChange={(e) => setForm({ ...form, twilio_sid: e.target.value })} placeholder={int.configured ? "•••• guardado" : ""} />}</Field>
-            <Field label="Auth Token" hint="Se guarda de forma privada y nunca se vuelve a mostrar.">{(p) => <input {...p} className="input" type="password" autoComplete="new-password" value={form.twilio_token} onChange={(e) => setForm({ ...form, twilio_token: e.target.value })} placeholder={int.configured ? "•••• guardado" : ""} />}</Field>
-            <Field label="Número emisor de WhatsApp" hint="Con prefijo, por ejemplo +14155238886">{(p) => <input {...p} className="input" value={form.twilio_wa_from} onChange={(e) => setForm({ ...form, twilio_wa_from: e.target.value })} />}</Field>
-            <Field label="Número emisor de SMS" hint="Con prefijo internacional.">{(p) => <input {...p} className="input" value={form.twilio_sms_from} onChange={(e) => setForm({ ...form, twilio_sms_from: e.target.value })} />}</Field>
-            <label className="flex items-center gap-3"><input type="checkbox" className="h-5 w-5" checked={form.wa_enabled} onChange={(e) => setForm({ ...form, wa_enabled: e.target.checked })} />Activar avisos por WhatsApp</label>
-            <label className="flex items-center gap-3"><input type="checkbox" className="h-5 w-5" checked={form.sms_enabled} onChange={(e) => setForm({ ...form, sms_enabled: e.target.checked })} />Activar avisos por SMS</label>
-            <button className="btn btn-dark">Guardar mensajería</button>
-          </form>
         </div>
       </div>
       <section className="card mt-6">

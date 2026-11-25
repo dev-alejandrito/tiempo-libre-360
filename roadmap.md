@@ -9,5 +9,6 @@
 - [x] Admin: ortizcallesjoahann@gmail.com (se activa al registrarse y confirmar ese correo)
 - [x] Pruebas de extremo a extremo
 - [x] Mostrar y ocultar contraseñas en ingreso, registro, recuperación y configuración; comprobado en computadora y celular
+- [x] Quitar teléfono/WhatsApp y aviso IPN; insignia de usuario verificado por admin
 - [ ] Datos existentes de PocketBase — espera exportación del usuario
 - [ ] Publicar — espera autorización del usuario

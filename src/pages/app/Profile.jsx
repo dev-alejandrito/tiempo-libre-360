@@ -84,7 +84,7 @@ export default function Profile() {
               <li key={t} className="flex gap-2 text-sm">{ok ? <CircleCheck size={18} className="shrink-0 text-ok" aria-hidden="true" /> : <Circle size={18} className="shrink-0 text-[#7a7466]" aria-hidden="true" />}<span>{ok ? <span className="sr-only">Hecho: </span> : <span className="sr-only">Pendiente: </span>}{!ok && to ? <Link to={to} className="font-semibold underline">{t}</Link> : t}</span></li>
             ))}
           </ul>
-          <div className="mt-5 flex items-center gap-2 rounded-xl bg-sand p-3 text-sm"><MapPin size={16} aria-hidden="true" />Tus datos privados (correo, teléfono) nunca se muestran a otras personas.</div>
+          <div className="mt-5 flex items-center gap-2 rounded-xl bg-sand p-3 text-sm"><MapPin size={16} aria-hidden="true" />Tus datos privados (como tu correo) nunca se muestran a otras personas.</div>
         </aside>
       </div>
     </>

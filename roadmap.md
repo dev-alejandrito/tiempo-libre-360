@@ -11,4 +11,7 @@
 - [x] Mostrar y ocultar contraseñas en ingreso, registro, recuperación y configuración; comprobado en computadora y celular
 - [x] Quitar teléfono/WhatsApp y aviso IPN; insignia de usuario verificado por admin
 - [ ] Datos existentes de PocketBase — espera exportación del usuario
+- [x] Revisar existencia, confirmación, roles y bloqueos de las dos cuentas administrativas solicitadas
+- [x] Reenviar confirmación oficial a Joahann (solicitud aceptada; entrega y apertura pendientes) y comprobar bloqueo del panel/API con una cuenta normal real
+- [ ] Activar acceso de ambas cuentas administrativas — espera registro de Alejandro y confirmación por correo; después asignar el rol pendiente y comprobar sesiones reales
 - [ ] Publicar — espera autorización del usuario

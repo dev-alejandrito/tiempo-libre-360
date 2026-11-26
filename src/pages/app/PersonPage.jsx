@@ -22,8 +22,9 @@ export default function PersonPage() {
   if (error) return <Alert kind="error">{error} <Link to="/app/buscar" className="font-bold underline">Volver a buscar</Link></Alert>;
   return (
     <>
+      {p.cover_url && <img src={p.cover_url} alt={`Portada de ${p.name}`} className="mb-4 h-40 w-full rounded-lg object-cover sm:h-52" />}
       <div className="card-dark dark-surface mb-6 flex flex-wrap items-center gap-4">
-        <Avatar name={p.name} size={72} />
+        <Avatar name={p.name} size={72} src={p.avatar_url} />
         <div className="min-w-0 flex-1">
           <h1 className="text-3xl font-extrabold">{p.name}<UserVerifiedBadge show={p.userVerified} /></h1>
           <p className="text-[#d5deec]">{p.headline || "Miembro de la comunidad"}</p>

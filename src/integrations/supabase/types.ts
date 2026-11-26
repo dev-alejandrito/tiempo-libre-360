@@ -710,8 +710,10 @@ export type Database = {
       members: {
         Row: {
           availability: Json
+          avatar_path: string
           bio: string
           city: string
+          cover_path: string
           created: string
           email: string
           headline: string
@@ -730,8 +732,10 @@ export type Database = {
         }
         Insert: {
           availability?: Json
+          avatar_path?: string
           bio?: string
           city?: string
+          cover_path?: string
           created?: string
           email?: string
           headline?: string
@@ -750,8 +754,10 @@ export type Database = {
         }
         Update: {
           availability?: Json
+          avatar_path?: string
           bio?: string
           city?: string
+          cover_path?: string
           created?: string
           email?: string
           headline?: string

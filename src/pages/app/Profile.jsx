@@ -2,19 +2,21 @@ import { MapPin, LocateFixed, CircleCheck, Circle } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@/lib/router";
 
-import { Alert, Field, PageHeader, Progress, useToast } from "../../components/ui";
+import { Alert, Avatar, Field, PageHeader, Progress, useToast } from "../../components/ui";
 import AvailabilityEditor from "../../components/AvailabilityEditor";
 import MapView from "../../components/MapView";
 import { useAuth } from "../../lib/auth";
 import { useApi } from "../../lib/hooks";
-import { errMsg, pb } from "../../lib/pb";
+import { api, errMsg, pb } from "../../lib/pb";
+import { uploadPrivate } from '../../lib/storage';
 
 const parseAv = (v) => (Array.isArray(v) ? v : []);
 
 export default function Profile() {
-  const { me } = useAuth();
+  const { me, refresh } = useAuth();
   const toast = useToast();
-  const { data } = useApi("/person/" + me.id);
+  const { data, reload } = useApi("/person/" + me.id);
+  const [imageBusy, setImageBusy] = useState('');
   const [f, setF] = useState({ name: me.name || "", headline: me.headline || "", bio: me.bio || "", city: me.city || "", share: !!me.share_location, lat: me.lat || 0, lng: me.lng || 0, availability: parseAv(me.availability) });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -44,13 +46,34 @@ export default function Profile() {
       toast("Perfil guardado.");
     } catch (err) { setError(errMsg(err)); } finally { setBusy(false); }
   }
+  async function uploadImage(event, kind) {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (!file) return;
+    if (!/\.(jpg|jpeg|png|webp)$/i.test(file.name) || !['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) {
+      setError('Elige una imagen JPG, PNG o WEBP de hasta 5 MB.'); return;
+    }
+    setError(''); setImageBusy(kind);
+    try {
+      const uploaded = await uploadPrivate(file, 'profile', kind);
+      await api('/me/profile-image', { method: 'POST', body: { kind, path: uploaded.path } });
+      await refresh(); reload(); toast(kind === 'avatar' ? 'Fotografía guardada.' : 'Portada guardada.');
+    } catch (err) { setError(errMsg(err)); } finally { setImageBusy(''); }
+  }
   return (
     <>
-      <PageHeader title="Perfil inteligente" subtitle="Cuanto más completo, mejores son tus coincidencias. No pedimos certificados, fotos ni documentos." />
+      <PageHeader title="Perfil inteligente" subtitle="Cuanto más completo, mejores son tus coincidencias." />
       <div className="grid gap-6 lg:grid-cols-[1fr_20rem]">
         <form onSubmit={save} className="space-y-6">
           <section className="card space-y-4">
             <h2 className="text-xl font-bold">Sobre ti</h2>
+            {data?.cover_url && <img src={data.cover_url} alt="Tu portada" className="h-36 w-full rounded-lg object-cover" />}
+            <Avatar name={me.name} size={72} src={data?.avatar_url} />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Fotografía" hint="JPG, PNG o WEBP · hasta 5 MB.">{(p) => <input {...p} className="input" type="file" accept="image/jpeg,image/png,image/webp" disabled={!!imageBusy} onChange={(e) => uploadImage(e, 'avatar')} />}</Field>
+              <Field label="Portada" hint="JPG, PNG o WEBP · hasta 5 MB.">{(p) => <input {...p} className="input" type="file" accept="image/jpeg,image/png,image/webp" disabled={!!imageBusy} onChange={(e) => uploadImage(e, 'cover')} />}</Field>
+            </div>
+            {imageBusy && <p role="status" className="hint">Guardando imagen…</p>}
             <Field label="Nombre y apellido">{(p) => <input {...p} className="input" required value={f.name} onChange={set("name")} />}</Field>
             <Field label="Titular" hint="Una frase corta, por ejemplo: «Profe de inglés y amante del senderismo».">{(p) => <input {...p} className="input" maxLength={120} value={f.headline} onChange={set("headline")} />}</Field>
             <Field label="Presentación">{(p) => <textarea {...p} className="input" rows={4} maxLength={800} value={f.bio} onChange={set("bio")} />}</Field>

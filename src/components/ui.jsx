@@ -197,9 +197,9 @@ export function Pagination({ page, total, perPage, onPage }) {
   );
 }
 
-export function Avatar({ name = "?", size = 44 }) {
+export function Avatar({ name = "?", size = 44, src = "" }) {
   const initials = name.split(/\s+/).slice(0, 2).map((p) => p[0]?.toUpperCase()).join("");
-  return <span aria-hidden="true" className="grid shrink-0 place-items-center rounded-full bg-ink font-display font-bold text-amber" style={{ width: size, height: size, fontSize: size * 0.38 }}>{initials}</span>;
+  return <span aria-hidden="true" className="grid shrink-0 place-items-center overflow-hidden rounded-full bg-ink font-display font-bold text-amber" style={{ width: size, height: size, fontSize: size * 0.38 }}>{src ? <img src={src} alt="" className="h-full w-full object-cover" /> : initials}</span>;
 }
 
 // Insignia de persona verificada por la administración (distinta de la verificación de habilidades).
@@ -210,5 +210,5 @@ export function UserVerifiedBadge({ show }) {
 
 // Insignia que solo aparece cuando la administración aprobó la verificación de la habilidad.
 export function VerifiedBadge({ small = false }) {
-  return <span className="chip chip-ok" title="Habilidad verificada por la administración (video y certificado revisados)"><BadgeCheck size={small ? 12 : 14} aria-hidden="true" />Verificada</span>;
+  return <span className="chip chip-ok" title="Habilidad acreditada por la administración (video y certificado revisados)"><Star size={small ? 14 : 16} className="fill-amber text-amber-deep" aria-hidden="true" />Verificada</span>;
 }

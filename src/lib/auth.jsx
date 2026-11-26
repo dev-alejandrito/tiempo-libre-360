@@ -23,7 +23,7 @@ function authError(error) {
   const msg = String(error?.message || "");
   const e = new Error(msg);
   if (/banned/i.test(msg)) { e.status = 403; e.message = "Tu cuenta está suspendida. Contacta con la comunidad."; }
-  else if (/not confirmed/i.test(msg)) { e.status = 403; e.message = "Confirma tu correo antes de entrar: revisa tu bandeja (y la carpeta de spam) y abre el enlace que te enviamos."; }
+  else if (/not confirmed/i.test(msg)) { e.status = 403; e.message = "Esta cuenta anterior aún no está habilitada. Utiliza la recuperación de contraseña o contacta con administración."; }
   else if (/invalid login credentials/i.test(msg)) { e.status = 400; e.message = "Correo o contraseña incorrectos."; }
   else if (/rate limit|too many/i.test(msg)) { e.status = 429; e.message = "Demasiados intentos. Espera unos minutos antes de volver a intentarlo."; }
   else if (/already registered|already exists/i.test(msg)) { e.status = 400; e.message = "Ese correo ya tiene una cuenta o no es válido."; }
@@ -94,12 +94,14 @@ export function AuthProvider({ children }) {
     return rec;
   }, [apply]);
 
-  // Con verificación de correo: la cuenta queda creada y la persona debe abrir el enlace del correo.
+  // Lovable Cloud permite acceso inmediato; nunca fingimos una sesión si el registro no la devuelve.
   const register = useCallback(async ({ name, email, password }) => {
-    const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { name }, emailRedirectTo: window.location.origin + "/app/perfil" } });
+    const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { name }, emailRedirectTo: window.location.origin } });
     if (error) throw authError(error);
-    if (data.session) { await apply(data.session); return { confirmed: true }; }
-    return { confirmed: false };
+    if (!data.session) throw new Error("No se pudo abrir tu sesión. Intenta iniciar sesión o recuperar tu contraseña.");
+    const rec = await apply(data.session);
+    if (!rec) throw new Error("Tu cuenta no está disponible. Contacta con administración.");
+    return { confirmed: true };
   }, [apply]);
 
   const logout = useCallback(() => { supabase.auth.signOut(); }, []);

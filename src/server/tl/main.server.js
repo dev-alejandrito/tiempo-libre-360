@@ -4,6 +4,7 @@ import {
   haversine, distLabel, parseAvail, mins, overlapHours, isStaff, getMember, membersMap, DURATIONS, skillDurations,
   settings, audit, notify, notifyStaff, wallet, move, walletView, rolesFor,
 } from "./core.server.js";
+import { profileImageUrls } from './profile-images.server.js';
 
 // ---------- pasaporte e insignias ----------
 export async function stats(memberId) {
@@ -70,6 +71,7 @@ export async function personView(me, id) {
   }
   const accs = await q(db.from("accreditations").select("skill_name, title, kind, reviewed_at").eq("member", id).eq("status", "approved").order("reviewed_at", { ascending: false }).limit(30));
   return {
+    ...(await profileImageUrls(m)),
     accreditations: accs.map((a) => ({ skill_name: a.skill_name, title: a.title, kind: a.kind, verified: true })),
     id: m.id, name: id === me.id ? m.name : displayName(m.name), userVerified: userVerified(m), headline: m.headline, bio: m.bio,
     city: share ? m.city : "", distance: dist, joined: m.created,
@@ -107,6 +109,7 @@ const skillBrief = (s) => ({ id: s.id, name: s.name, level: s.level, mode: s.mod
 
 export async function matches(me) {
   const groups = await groupSkills(), rmap = await ratingMap();
+  const amap = await approvedMap(Object.keys(groups));
   const mine = groups[me.id] || [];
   const myWants = mine.filter((s) => s.kind === "want"), myOffers = mine.filter((s) => s.kind === "offer");
   const myAv = parseAvail(me);
@@ -149,7 +152,7 @@ export async function matches(me) {
     out.push({
       id: m.id, name: displayName(m.name), userVerified: userVerified(m), headline: m.headline, city: m.share_location ? m.city : "",
       distance: dlabel, score: Math.min(99, Math.round(score)), reasons, kind: learn && teach ? "mutual" : learn ? "learn" : "teach",
-      learn: learn ? skillBrief(learn.o) : null, teach: teach ? skillBrief(teach.w) : null, overlap: ov, ratingAvg: avg, ratingCount: rt ? rt.n : 0,
+      learn: learn ? { ...skillBrief(learn.o), verified: isVerified(amap, m.id, learn.o.name) } : null, teach: teach ? skillBrief(teach.w) : null, overlap: ov, ratingAvg: avg, ratingCount: rt ? rt.n : 0,
     });
   });
   out.sort((a, b) => b.score - a.score);
@@ -659,6 +662,7 @@ export async function contact(b) {
 export async function adminRole(me, id, b) {
   const role = str(b.role, 20);
   if (!["user", "moderator", "admin"].includes(role)) fail("Rol no válido.");
+  if (role === 'admin') fail('La administración principal se asigna solo mediante el procedimiento seguro del servidor.', 403);
   const m = await getMember(id); if (!m) fail("Usuario no encontrado.", 404);
   if (m.id === me.id) fail("No puedes cambiar tu propio rol. Pídeselo a otra persona administradora.");
   const before = (await rolesFor([m.id]))[m.id] || "user";

@@ -6,12 +6,17 @@
 - [x] Verificación de habilidades: video + certificado obligatorios, revisión admin
 - [x] Sugerencias, quejas y reportes con respuesta y estados
 - [x] Chat privado para acordar clases personalizadas (sin pagos)
-- [x] Admin: ortizcallesjoahann@gmail.com (se activa al registrarse y confirmar ese correo)
+- [ ] Admin exclusivo: alejandroortizcalles@gmail.com — verificar titularidad independiente antes de asignar admin
 - [x] Pruebas de extremo a extremo
 - [x] Mostrar y ocultar contraseñas en ingreso, registro, recuperación y configuración; comprobado en computadora y celular
 - [x] Quitar teléfono/WhatsApp y aviso IPN; insignia de usuario verificado por admin
 - [ ] Datos existentes de PocketBase — espera exportación del usuario
 - [x] Revisar existencia, confirmación, roles y bloqueos de las dos cuentas administrativas solicitadas
 - [x] Reenviar confirmación oficial a Joahann (solicitud aceptada; entrega y apertura pendientes) y comprobar bloqueo del panel/API con una cuenta normal real
-- [ ] Activar acceso de ambas cuentas administrativas — espera registro de Alejandro y confirmación por correo; después asignar el rol pendiente y comprobar sesiones reales
+- [ ] Registro con acceso inmediato y recuperación conservada
+- [ ] Fotografía y portada propias, guardadas y visibles en perfil
+- [ ] Estrella de acreditación únicamente para habilidades aprobadas
+- [ ] Comisión 10/90 de clases pagadas, sin comisión en créditos, con protección contra duplicados
+- [ ] Stripe Connect México de pruebas — autorización recibida; comprobar disponibilidad de Connect
+- [ ] Comprobar los cambios prioritarios sin auditoría general ni datos ficticios
 - [ ] Publicar — espera autorización del usuario

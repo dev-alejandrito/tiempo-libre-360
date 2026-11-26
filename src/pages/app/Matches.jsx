@@ -2,7 +2,7 @@ import { HeartHandshake, MapPin, Check } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@/lib/router";
 
-import { Alert, Avatar, Empty, PageHeader, Spinner, Stars, UserVerifiedBadge } from "../../components/ui";
+import { Alert, Avatar, Empty, PageHeader, Spinner, Stars, UserVerifiedBadge, VerifiedBadge } from "../../components/ui";
 import RequestModal from "../../components/RequestModal";
 import { useApi } from "../../lib/hooks";
 import { LEVELS, MODES } from "../../lib/util";
@@ -31,7 +31,7 @@ export function MatchCard({ m, onRequest }) {
         <h4 className="text-sm font-bold">¿Por qué te lo recomendamos?</h4>
         <ul className="mt-1 space-y-1 text-sm">{m.reasons.map((r) => <li key={r} className="flex gap-2"><Check size={16} className="mt-0.5 shrink-0 text-teal" aria-hidden="true" />{r}</li>)}</ul>
       </div>
-      {m.learn && <p className="rounded-xl bg-sand p-2.5 text-sm"><strong>{m.learn.name}</strong> · {LEVELS[m.learn.level]} · {MODES[m.learn.mode]}</p>}
+      {m.learn && <p className="rounded-xl bg-sand p-2.5 text-sm"><strong>{m.learn.name}</strong> {m.learn.verified && <VerifiedBadge small />} · {LEVELS[m.learn.level]} · {MODES[m.learn.mode]}</p>}
       <div className="mt-auto flex flex-wrap gap-2">
         <Link to={`/app/persona/${m.id}`} className="btn btn-ghost btn-sm">Ver perfil</Link>
         {m.learn && <button type="button" className="btn btn-primary btn-sm" onClick={() => onRequest(m)}>Solicitar sesión</button>}

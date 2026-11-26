@@ -3,6 +3,7 @@ import { getRequest } from "@tanstack/react-start/server";
 import { db, q, TLError, fail, loadMe, str, isStaff, isAdmin } from "./core.server.js";
 import * as M from "./main.server.js";
 import * as X from "./ext.server.js";
+import { saveProfileImage } from './profile-images.server.js';
 
 // [método, patrón, nivel ("open" | "auth" | "staff" | "admin"), handler(ctx)]
 const ROUTES = [
@@ -16,6 +17,7 @@ const ROUTES = [
   ["GET", "/matches", "auth", async ({ me }) => ({ items: await M.matches(me) })],
   ["GET", "/people", "auth", async ({ me, query }) => ({ items: await M.peopleSearch(me, query) })],
   ["GET", "/person/:id", "auth", ({ me, p }) => M.personView(me, p.id)],
+  ["POST", "/me/profile-image", "auth", ({ me, body }) => saveProfileImage(me, body)],
   ["GET", "/exchanges", "auth", ({ me }) => M.listExchanges(me)],
   ["GET", "/exchanges/:id", "auth", ({ me, p }) => M.exchangeDetail(me, p.id)],
   ["POST", "/exchanges", "auth", ({ me, body }) => M.createExchange(me, body)],

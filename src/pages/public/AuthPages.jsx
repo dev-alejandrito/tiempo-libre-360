@@ -58,7 +58,6 @@ export function Register() {
   const [f, setF] = useState({ name: "", email: "", password: "", agree: false });
   const [errors, setErrors] = useState({});
   const [state, setState] = useState({ busy: false, error: "" });
-  const [sent, setSent] = useState("");
   if (me) return <Navigate to="/app" replace />;
   async function submit(e) {
     e.preventDefault();
@@ -70,17 +69,11 @@ export function Register() {
     if (Object.keys(er).length) return;
     setState({ busy: true, error: "" });
     try {
-      const r = await register({ name: f.name.trim(), email: f.email.trim(), password: f.password });
-      if (r?.confirmed) nav("/app/perfil", { replace: true });
-      else { setSent(f.email.trim()); setState({ busy: false, error: "" }); }
+      await register({ name: f.name.trim(), email: f.email.trim(), password: f.password });
+      nav("/app/perfil", { replace: true });
     }
     catch (err) { setState({ busy: false, error: errMsg(err) }); }
   }
-  if (sent) return (
-    <Shell title="Revisa tu correo" subtitle="Ya casi está lista tu cuenta." footer={<>¿Ya confirmaste? <Link to="/ingresar" className="font-bold underline">Inicia sesión</Link></>}>
-      <Alert kind="info">Te enviamos un enlace de confirmación a <strong>{sent}</strong>. Ábrelo para activar tu cuenta; después podrás entrar con tu correo y contraseña. Si no lo ves, revisa la carpeta de spam.</Alert>
-    </Shell>
-  );
   return (
     <Shell title="Crea tu cuenta" subtitle="Gratis. Recibirás créditos de bienvenida." footer={<>¿Ya tienes cuenta? <Link to="/ingresar" className="font-bold underline">Inicia sesión</Link></>}>
       <form onSubmit={submit} className="space-y-4" noValidate>

@@ -13,6 +13,14 @@ function imageType(bytes) {
 export async function saveProfileImage(me, body) {
   const column = body.kind === 'avatar' ? 'avatar_path' : body.kind === 'cover' ? 'cover_path' : '';
   if (!column || !validProfileImagePath(me.id, body.path)) fail('Imagen no válida.');
+  if (body.action === 'remove') {
+    // Remove only the displayed association, never the stored evidence file.
+    // Match the current path so a stale tab cannot remove a newer photograph.
+    const changed = await q(db.from('members').update({ [column]: '' }).eq('id', me.id).eq(column, body.path).select('id').maybeSingle());
+    if (!changed) fail('La imagen cambió. Actualiza tu perfil antes de retirarla.', 409);
+    return { ok: true };
+  }
+  if (body.action !== undefined) fail('Acción de imagen no válida.');
   const { data: blob, error } = await db.storage.from(BUCKET).download(body.path);
   if (error || !blob) fail('No encontramos la imagen subida.');
   if (!blob.size || blob.size > PROFILE_IMAGE_MAX) fail('La imagen debe pesar 5 MB o menos.');

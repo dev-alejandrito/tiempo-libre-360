@@ -1,8 +1,9 @@
-import { MapPin, LocateFixed, CircleCheck, Circle } from "lucide-react";
+import { MapPin, LocateFixed, CircleCheck, Circle, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "@/lib/router";
 
-import { Alert, Avatar, Field, PageHeader, Progress, useToast } from "../../components/ui";
+import { Alert, Avatar, Field, Modal, PageHeader, Progress, useToast } from "../../components/ui";
+import { Button } from '@/components/ui/button';
 import AvailabilityEditor from "../../components/AvailabilityEditor";
 import MapView from "../../components/MapView";
 import { useAuth } from "../../lib/auth";
@@ -18,6 +19,7 @@ export default function Profile() {
   const toast = useToast();
   const { data, reload } = useApi("/person/" + me.id);
   const [imageBusy, setImageBusy] = useState('');
+  const [removeKind, setRemoveKind] = useState('');
   const [f, setF] = useState({ name: me.name || "", headline: me.headline || "", bio: me.bio || "", city: me.city || "", share: !!me.share_location, lat: me.lat || 0, lng: me.lng || 0, availability: parseAv(me.availability) });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -59,6 +61,17 @@ export default function Profile() {
       await refresh(); reload(); toast(kind === 'avatar' ? 'Fotografía guardada.' : 'Portada guardada.');
     } catch (err) { setError(errMsg(err)); } finally { setImageBusy(''); }
   }
+  async function removeImage() {
+    const kind = removeKind;
+    const path = kind === 'avatar' ? me.avatar_path : kind === 'cover' ? me.cover_path : '';
+    if (!path || imageBusy) return;
+    setError(''); setImageBusy('remove');
+    try {
+      await api('/me/profile-image', { method: 'POST', body: { action: 'remove', kind, path } });
+      await refresh(); reload(); setRemoveKind('');
+      toast(kind === 'avatar' ? 'Fotografía retirada del perfil.' : 'Portada retirada del perfil.');
+    } catch (err) { setError(errMsg(err)); setRemoveKind(''); } finally { setImageBusy(''); }
+  }
   return (
     <>
       <PageHeader title="Perfil inteligente" subtitle="Cuanto más completo, mejores son tus coincidencias." />
@@ -69,10 +82,16 @@ export default function Profile() {
             {data?.cover_url && <img src={data.cover_url} alt="Tu portada" className="h-36 w-full rounded-lg object-cover" />}
             <Avatar name={me.name} size={72} src={data?.avatar_url} />
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Fotografía" hint="JPG, PNG o WEBP · hasta 5 MB.">{(p) => <input {...p} className="input" type="file" accept="image/jpeg,image/png,image/webp" disabled={!!imageBusy} onChange={(e) => uploadImage(e, 'avatar')} />}</Field>
-              <Field label="Portada" hint="JPG, PNG o WEBP · hasta 5 MB.">{(p) => <input {...p} className="input" type="file" accept="image/jpeg,image/png,image/webp" disabled={!!imageBusy} onChange={(e) => uploadImage(e, 'cover')} />}</Field>
+              <div>
+                <Field label="Fotografía" hint="JPG, PNG o WEBP · hasta 5 MB.">{(p) => <input {...p} className="input" type="file" accept="image/jpeg,image/png,image/webp" disabled={!!imageBusy} onChange={(e) => uploadImage(e, 'avatar')} />}</Field>
+                {me.avatar_path && <Button type="button" variant="ghost" size="icon" className="btn btn-ghost mt-2" aria-label="Retirar fotografía" title="Retirar fotografía" disabled={!!imageBusy} onClick={() => setRemoveKind('avatar')}><Trash2 aria-hidden="true" /></Button>}
+              </div>
+              <div>
+                <Field label="Portada" hint="JPG, PNG o WEBP · hasta 5 MB.">{(p) => <input {...p} className="input" type="file" accept="image/jpeg,image/png,image/webp" disabled={!!imageBusy} onChange={(e) => uploadImage(e, 'cover')} />}</Field>
+                {me.cover_path && <Button type="button" variant="ghost" size="icon" className="btn btn-ghost mt-2" aria-label="Retirar portada" title="Retirar portada" disabled={!!imageBusy} onClick={() => setRemoveKind('cover')}><Trash2 aria-hidden="true" /></Button>}
+              </div>
             </div>
-            {imageBusy && <p role="status" className="hint">Guardando imagen…</p>}
+            {imageBusy && <p role="status" className="hint">{imageBusy === 'remove' ? 'Retirando imagen…' : 'Guardando imagen…'}</p>}
             <Field label="Nombre y apellido">{(p) => <input {...p} className="input" required value={f.name} onChange={set("name")} />}</Field>
             <Field label="Titular" hint="Una frase corta, por ejemplo: «Profe de inglés y amante del senderismo».">{(p) => <input {...p} className="input" maxLength={120} value={f.headline} onChange={set("headline")} />}</Field>
             <Field label="Presentación">{(p) => <textarea {...p} className="input" rows={4} maxLength={800} value={f.bio} onChange={set("bio")} />}</Field>
@@ -109,6 +128,13 @@ export default function Profile() {
           <div className="mt-5 flex items-center gap-2 rounded-xl bg-sand p-3 text-sm"><MapPin size={16} aria-hidden="true" />Tus datos privados (como tu correo) nunca se muestran a otras personas.</div>
         </aside>
       </div>
+      {removeKind && <Modal title={removeKind === 'avatar' ? 'Retirar fotografía' : 'Retirar portada'} onClose={() => { if (!imageBusy) setRemoveKind(''); }}>
+        <p>La imagen dejará de mostrarse en tu perfil. El archivo privado se conservará.</p>
+        <div className="mt-4 flex flex-wrap justify-end gap-2">
+          <Button type="button" variant="ghost" className="btn btn-ghost" disabled={!!imageBusy} onClick={() => setRemoveKind('')}>Cancelar</Button>
+          <Button type="button" className="btn btn-primary" disabled={!!imageBusy} onClick={removeImage}><Trash2 aria-hidden="true" />{imageBusy ? 'Retirando…' : 'Retirar del perfil'}</Button>
+        </div>
+      </Modal>}
     </>
   );
 }

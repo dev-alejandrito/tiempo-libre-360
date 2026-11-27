@@ -41,3 +41,4 @@ use the editor.
 - Profile photos remain in the existing private evidence bucket under each user's profile folder, validated server-side and displayed through temporary signed URLs. Why: preserves storage and prevents cross-user file substitution.
 - Account password fields use the shared PasswordInput control, preserving native input props and independent visibility state. Why: keeps login, registration and password changes consistent without changing authentication.
 - Profile-image preflight lives in a browser-safe helper and runs before the existing upload call; server ownership validation remains authoritative. Why: reject empty, disguised or undecodable files without changing storage or access rules.
+- Profile-image removal clears only the authenticated member's selected image association, matching its current path; it never deletes storage objects. Why: preserve original files and prevent stale tabs from removing replacement photographs.

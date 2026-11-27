@@ -4,6 +4,7 @@
 
 - [x] Perfil y fotografías: validación local reforzada; 8 pruebas nuevas y rechazo en perfil autenticado en computadora/celular sin escrituras
 - [ ] Comprobar subida y lectura de fotografía real — espera archivo del propietario; no se subieron imágenes ficticias
+- [ ] Permitir retirar fotografía/portada del perfil conservando el archivo privado; probar lógica y controles, sin sustituir fotografías del propietario
 - [ ] Moderación administrativa de imágenes — bloqueada por prohibición de cambios de datos/almacenamiento; no hay estado de revisión existente para fotos
 - [ ] Jitsi exclusivo para participantes — enlaces únicos y acceso al enlace ya existentes; exclusividad en la sala requiere servicio con acceso firmado, conexión prohibida
 - [ ] Billetera de compras y paquetes MXN separados de intercambio — bloqueada por prohibición de nuevas tablas/datos; precios pendientes del propietario

@@ -1,5 +1,19 @@
 # TIEMPO LIBRE 360 — migración a Lovable
 
+## Mejoras prioritarias solicitadas el 27 de noviembre de 2026
+
+- [x] Perfil y fotografías: validación local reforzada; 8 pruebas nuevas y rechazo en perfil autenticado en computadora/celular sin escrituras
+- [ ] Comprobar subida y lectura de fotografía real — espera archivo del propietario; no se subieron imágenes ficticias
+- [ ] Moderación administrativa de imágenes — bloqueada por prohibición de cambios de datos/almacenamiento; no hay estado de revisión existente para fotos
+- [ ] Jitsi exclusivo para participantes — enlaces únicos y acceso al enlace ya existentes; exclusividad en la sala requiere servicio con acceso firmado, conexión prohibida
+- [ ] Billetera de compras y paquetes MXN separados de intercambio — bloqueada por prohibición de nuevas tablas/datos; precios pendientes del propietario
+- [ ] Stripe de pruebas y saldos de prueba — bloqueados por prohibición de conexiones y cambios de datos; no habilitar ni cobrar
+- [ ] Mis transferencias y vista administrativa — bloqueadas por ausencia de registros separados de pagos y prohibición de cambios de datos
+- [ ] CAPTCHA validado en servidor — bloqueado por prohibición de modificar autenticación/conexiones
+- [x] Entregar informe y ZIP del código actualizado, sin secretos, dependencias ni datos privados
+
+## Trabajo anterior (no ampliar en esta solicitud)
+
 - [x] Esquema y seguridad en Lovable Cloud (tablas, permisos, almacenamiento privado)
 - [x] Lógica de servidor portada
 - [x] Interfaz original funcionando con rutas nuevas (mismo diseño)

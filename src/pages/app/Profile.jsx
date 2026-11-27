@@ -9,6 +9,7 @@ import { useAuth } from "../../lib/auth";
 import { useApi } from "../../lib/hooks";
 import { api, errMsg, pb } from "../../lib/pb";
 import { uploadPrivate } from '../../lib/storage';
+import { validateProfileImage } from '../../lib/profile-image';
 
 const parseAv = (v) => (Array.isArray(v) ? v : []);
 
@@ -50,11 +51,9 @@ export default function Profile() {
     const file = event.target.files?.[0];
     event.target.value = '';
     if (!file) return;
-    if (!/\.(jpg|jpeg|png|webp)$/i.test(file.name) || !['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) {
-      setError('Elige una imagen JPG, PNG o WEBP de hasta 5 MB.'); return;
-    }
     setError(''); setImageBusy(kind);
     try {
+      await validateProfileImage(file);
       const uploaded = await uploadPrivate(file, 'profile', kind);
       await api('/me/profile-image', { method: 'POST', body: { kind, path: uploaded.path } });
       await refresh(); reload(); toast(kind === 'avatar' ? 'Fotografía guardada.' : 'Portada guardada.');

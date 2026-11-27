@@ -40,3 +40,4 @@ use the editor.
 - Private class commission accounting is server-only and isolated from time-credit accounting; provider settlement requires verified test events and unique event/payment identifiers. Why: prevents fabricated, live or duplicate payments.
 - Profile photos remain in the existing private evidence bucket under each user's profile folder, validated server-side and displayed through temporary signed URLs. Why: preserves storage and prevents cross-user file substitution.
 - Account password fields use the shared PasswordInput control, preserving native input props and independent visibility state. Why: keeps login, registration and password changes consistent without changing authentication.
+- Profile-image preflight lives in a browser-safe helper and runs before the existing upload call; server ownership validation remains authoritative. Why: reject empty, disguised or undecodable files without changing storage or access rules.
